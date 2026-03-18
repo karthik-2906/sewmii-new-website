@@ -1,0 +1,76 @@
+---
+import { Image } from "astro:assets";
+import promoImg from "../content/products/images/ophelia-corset/ophelia-corset-tech-drawing.jpg";
+import Layout from "../layouts/Layout.astro";
+import Section from "../components/Section.astro";
+import Title from "../components/Title.astro";
+import Text from "../components/Text.astro";
+import ButtonLink from "../components/ButtonLink.astro";
+import List from "../components/List.astro";
+---
+
+<Layout title="Homepage">
+    <main>
+        <Section bg="bg-amber-50">
+            <Title as="h1">Sewmii Pattern Studio</Title>
+            <Text>
+                Sewmii Pattern Studio – Love sewing but not patternmaking? Our
+                beginner-friendly digital and printed sewing patterns make it
+                easy to create beautiful clothing at home or for your garment
+                business. Designed by a pattern maker from the Philippines, each
+                pattern is ready to sew, easy to follow, and perfect for DIY
+                fashion.
+            </Text>
+        </Section>
+        <Section>
+            <div class="flex gap-16 max-md:flex-col-reverse max-md:gap-8">
+                <div class="flex flex-col justify-center">
+                    <Title
+                        as="h3"
+                        class="text-lg text-blue-800 max-md:text-base"
+                        >NEW LAUNCH</Title
+                    >
+                    <Title as="h2">Ophelia Corset</Title>
+                    <Text>
+                        Ophelia Corset is a timeless sewing pattern designed to
+                        celebrate classic femininity with a beautifully sculpted
+                        silhouette. Featuring a thoughtfully contoured waist,
+                        Ophelia creates an elegant cinch that enhances natural
+                        curves and delivers a refined hourglass shape. The
+                        design balances structure and softness, making it
+                        flattering, versatile, and effortlessly graceful.
+                        Perfect for sewists who love enduring style with a touch
+                        of drama, Ophelia Corset is a pattern that feels both
+                        iconic and timeless.
+                    </Text>
+                    <ButtonLink class="mt-4">View Item</ButtonLink>
+                </div>
+                <Image src={promoImg} alt="Temp alt" height={500} width={500} />
+            </div>
+        </Section>
+        <Section>
+            <div class="flex gap-16 max-md:flex-col max-md:gap-8">
+                <Image src={promoImg} alt="Temp alt" height={500} width={500} />
+                <div class="flex flex-col justify-center">
+                    <Title as="h2">Our Services</Title>
+                    <Text>
+                        We offer a wide array of services to help bring your
+                        creative ideas to life.
+                    </Text>
+                    <List
+                        items={[
+                            "Digital sewing patterns",
+                            "Physical sewing patterns*",
+                            "Custom exclusive patterns",
+                        ]}
+                    />
+                    <Text class="text-sm text-gray-500">
+                        *Physical printed patterns exclusively on Shopee in the
+                        Philippines, Singapore, and Malaysia.
+                    </Text>
+                    <ButtonLink class="mt-4">View Services</ButtonLink>
+                </div>
+            </div>
+        </Section>
+    </main>
+</Layout>

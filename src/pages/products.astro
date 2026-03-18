@@ -1,0 +1,17 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../layouts/Layout.astro";
+import Title from "../components/Title.astro";
+import ProductsList from "../components/ProductsList.astro";
+
+const products = await getCollection("products");
+---
+
+<Layout title="Product Page">
+    <main>
+        <Title as="h1">Custom Plushies</Title>
+        <Title as="h2">Products</Title>
+        <Title as="h3">Small Plushies</Title>
+        <ProductsList products={products} />
+    </main>
+</Layout>

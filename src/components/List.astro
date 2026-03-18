@@ -1,0 +1,32 @@
+---
+interface Props {
+    items: string[];
+    class?: string;
+}
+const { items, class: className = "" } = Astro.props;
+---
+
+<ul class={`mb-4 flex flex-col gap-3 ${className}`}>
+    {
+        items.map((item) => (
+            <li class="flex items-start gap-2 text-[1.1rem] font-medium leading-tight tracking-tight text-black/90">
+                <svg 
+    width="20" 
+    height="20" 
+    viewBox="0 0 24 24" 
+    fill="#A3E635" 
+    stroke="black" 
+    stroke-width="2.5" 
+    class="shrink-0 mt-0.5"
+  >
+    <circle cx="12" cy="12" r="10" />
+    <circle cx="9" cy="9" r="1.5" fill="black" />
+    <circle cx="15" cy="9" r="1.5" fill="black" />
+    <circle cx="9" cy="15" r="1.5" fill="black" />
+    <circle cx="15" cy="15" r="1.5" fill="black" />
+  </svg>
+                {item}
+            </li>
+        ))
+    }
+</ul>

@@ -1,0 +1,13 @@
+---
+type Props = {
+    class?: string;
+};
+
+const { class:className = "" } = Astro.props;
+const baseClasses =
+    "text-lg font-medium tracking-tight mb-4 max-md:text-base";
+---
+
+<p class={`${baseClasses} ${className}`}>
+    <slot />
+</p>

@@ -1,0 +1,13 @@
+---
+type Props = {
+    bg?: string;
+};
+
+const { bg = "bg-white" } = Astro.props;
+---
+
+<section class={bg}>
+    <div class="mx-auto w-full max-w-7xl px-12 py-24 max-md:px-6 max-md:py-12">
+        <slot />
+    </div>
+</section>
