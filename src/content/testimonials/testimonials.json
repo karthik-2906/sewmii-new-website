@@ -1,0 +1,32 @@
+[
+    {
+        "id": "review-1",
+        "review": "This is a delightful creative designed pattern, I am in love with look of the design. I had some questions regarding the printing of the pattern so I reached out the designer/seller and she was amazing!",
+        "name": "Elva",
+        "shop": "Etsy"
+    },
+    {
+        "id": "review-2",
+        "review": "As soon as I started sewing this project together, I could tell that this pattern was made by an incredibly talented and creative designer. I am a pretty advanced sewer, but have always wondered how to achieve structured shoulders like the ones featured in this pattern. Sewmii's pattern explained this concept easily- I definitely learned a lot while making this piece, and the end result is stunning!",
+        "name": "Barry",
+        "shop": "Etsy"
+    },
+    {
+        "id": "review-3",
+        "review": "Super duper obsessed with this pattern! Officially purchased for a project, but I’ll be making a few different colors in the future 😍",
+        "name": "Aliyah",
+        "shop": "Etsy"
+    },
+    {
+        "id": "review-4",
+        "review": "Easy pattern to use! Great video content to help as well! Highly recommend.",
+        "name": "Need for Bling",
+        "shop": "Shopee"
+    },
+    {
+        "id": "review-5",
+        "review": "I needed a unique jacket for a cosplay I was doing for DragonCon this year. This totally made my whole outfit. I am a visual learner so really appreciated the video tutorial. It helped immensely. The written instructions were a little tough to follow and the photos were dark. I think using more drastic colors to show what is the inner outer layers would have been helpful. I loved the structure technique they used. I am taking that and making it a part of my pattern making. It works so well. 10/10 would recommend.",
+        "name": "Mary",
+        "shop": "Shopee"
+    }
+]

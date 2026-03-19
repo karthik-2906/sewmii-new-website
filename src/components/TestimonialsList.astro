@@ -1,0 +1,47 @@
+---
+import type { CollectionEntry } from "astro:content";
+import TestimonialCard from "../components/TestimonialCard.astro";
+type Props = {
+    testimonials: CollectionEntry<"testimonials">[];
+};
+
+const { testimonials } = Astro.props;
+---
+
+<div class="grid grid-cols-3 gap-8 max-sm:grid-cols-1">
+    {testimonials.map((testimony) => <TestimonialCard testimony={testimony} />)}
+</div>
+
+<script>
+    document.addEventListener("click", (e) => {
+        const target = e.target as HTMLElement;
+        if (!target) return;
+
+        const trigger = target.closest("[data-testimonial-trigger]");
+        if (trigger) {
+            const id = trigger.getAttribute("data-testimonial-trigger");
+            const modal = document.getElementById(
+                `modal-${id}`,
+            ) as HTMLDialogElement;
+            modal?.showModal();
+            document.body.style.overflow = "hidden";
+            return;
+        }
+
+        const closeBtn = target.closest("[data-testimonial-close]");
+        if (closeBtn) {
+            const id = closeBtn.getAttribute("data-testimonial-close");
+            const modal = document.getElementById(
+                `modal-${id}`,
+            ) as HTMLDialogElement;
+            modal?.close();
+            document.body.style.overflow = "";
+            return;
+        }
+
+        if (target.tagName === "DIALOG") {
+            (target as HTMLDialogElement).close();
+            document.body.style.overflow = "";
+        }
+    });
+</script>

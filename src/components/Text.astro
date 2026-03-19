@@ -5,7 +5,7 @@ type Props = {
 
 const { class:className = "" } = Astro.props;
 const baseClasses =
-    "text-lg font-medium tracking-tight mb-4 max-md:text-base";
+    "text-lg font-medium tracking-tight mb-4 max-sm:text-base";
 ---
 
 <p class={`${baseClasses} ${className}`}>

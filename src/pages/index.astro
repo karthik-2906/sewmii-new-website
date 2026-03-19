@@ -1,5 +1,6 @@
 ---
 import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
 import promoImg from "../content/products/images/ophelia-corset/ophelia-corset-tech-drawing.jpg";
 import Layout from "../layouts/Layout.astro";
 import Section from "../components/Section.astro";
@@ -7,11 +8,16 @@ import Title from "../components/Title.astro";
 import Text from "../components/Text.astro";
 import ButtonLink from "../components/ButtonLink.astro";
 import List from "../components/List.astro";
+import ProductsList from "../components/ProductsList.astro";
+import TestimonialsList from "../components/TestimonialsList.astro";
+
+const products = await getCollection("products");
+const testimonials = await getCollection("testimonials");
 ---
 
 <Layout title="Homepage">
     <main>
-        <Section bg="bg-amber-50">
+        <Section id="intro" bg="bg-amber-50">
             <Title as="h1">Sewmii Pattern Studio</Title>
             <Text>
                 Sewmii Pattern Studio – Love sewing but not patternmaking? Our
@@ -22,14 +28,15 @@ import List from "../components/List.astro";
                 fashion.
             </Text>
         </Section>
-        <Section>
+        <Section id="new-launch">
             <div class="flex gap-16 max-md:flex-col-reverse max-md:gap-8">
                 <div class="flex flex-col justify-center">
                     <Title
                         as="h3"
                         class="text-lg text-blue-800 max-md:text-base"
-                        >NEW LAUNCH</Title
                     >
+                        NEW LAUNCH
+                    </Title>
                     <Title as="h2">Ophelia Corset</Title>
                     <Text>
                         Ophelia Corset is a timeless sewing pattern designed to
@@ -48,12 +55,12 @@ import List from "../components/List.astro";
                 <Image src={promoImg} alt="Temp alt" height={500} width={500} />
             </div>
         </Section>
-        <Section>
+        <Section id="services">
             <div class="flex gap-16 max-md:flex-col max-md:gap-8">
                 <Image src={promoImg} alt="Temp alt" height={500} width={500} />
                 <div class="flex flex-col justify-center">
                     <Title as="h2">Our Services</Title>
-                    <Text>
+                    <Text class="mb-6">
                         We offer a wide array of services to help bring your
                         creative ideas to life.
                     </Text>
@@ -71,6 +78,20 @@ import List from "../components/List.astro";
                     <ButtonLink class="mt-4">View Services</ButtonLink>
                 </div>
             </div>
+        </Section>
+        <Section id="featured-products">
+            <div class="flex justify-between items-start max-md:flex-col">
+                <Title as="h2" class="mb-8"> Featured Products </Title>
+                <ButtonLink class="max-md:mb-6">View All</ButtonLink>
+            </div>
+            <ProductsList products={products} />
+        </Section>
+        <Section id="testimonials">
+            <Title as="h2">Testimonials</Title>
+            <Text class="mb-8 max-md:mb-6">
+                Loved by customers who’ve tried our sewing patterns and designs.
+            </Text>
+            <TestimonialsList testimonials={testimonials} />
         </Section>
     </main>
 </Layout>

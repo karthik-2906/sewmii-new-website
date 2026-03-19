@@ -6,25 +6,21 @@ interface Props {
 const { items, class: className = "" } = Astro.props;
 ---
 
-<ul class={`mb-4 flex flex-col gap-3 ${className}`}>
+<ul class={`mb-4 flex flex-col gap-4 ${className}`}>
     {
         items.map((item) => (
-            <li class="flex items-start gap-2 text-[1.1rem] font-medium leading-tight tracking-tight text-black/90">
-                <svg 
-    width="20" 
-    height="20" 
-    viewBox="0 0 24 24" 
-    fill="#A3E635" 
-    stroke="black" 
-    stroke-width="2.5" 
-    class="shrink-0 mt-0.5"
-  >
-    <circle cx="12" cy="12" r="10" />
-    <circle cx="9" cy="9" r="1.5" fill="black" />
-    <circle cx="15" cy="9" r="1.5" fill="black" />
-    <circle cx="9" cy="15" r="1.5" fill="black" />
-    <circle cx="15" cy="15" r="1.5" fill="black" />
-  </svg>
+            <li class="flex items-center gap-2 text-[1.1rem] font-medium leading-tight tracking-tight text-black/90">
+                <svg
+                    viewBox="0 0 24 24"
+                    width="24"
+                    height="24"
+                >
+                    <circle cx="12" cy="12" r="9" fill="black" />
+                    <circle cx="9" cy="9" r="1.8" fill="white" />
+                    <circle cx="15" cy="9" r="1.8" fill="white" />
+                    <circle cx="9" cy="15" r="1.8" fill="white" />
+                    <circle cx="15" cy="15" r="1.8" fill="white" />
+                </svg>
                 {item}
             </li>
         ))
