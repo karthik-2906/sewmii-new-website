@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
-@theme inline {
-    --font-sans: var(--font-inter);
+@theme {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui;
+
+  --color-background: #FFFFFF;
+  /* --color-background: #FFFF0F; */
+  --color-primary: #000000;
+  --color-accent: #A3E635;
+  
+  --shadow-brutal: 3px 3px 0px 0px rgba(0,0,0,1);
+  --shadow-brutal-secondary: 3px 3px 0px 0px rgba(255,255,255,1);
 }

@@ -1,6 +1,8 @@
 ---
 import type { CollectionEntry } from "astro:content";
 import TestimonialCard from "../components/TestimonialCard.astro";
+import TestimonialModal from "../components/TestimonialModal.astro";
+
 type Props = {
     testimonials: CollectionEntry<"testimonials">[];
 };
@@ -8,40 +10,62 @@ type Props = {
 const { testimonials } = Astro.props;
 ---
 
-<div class="grid grid-cols-3 gap-8 max-sm:grid-cols-1">
-    {testimonials.map((testimony) => <TestimonialCard testimony={testimony} />)}
+<div class="grid grid-cols-3 gap-8 max-lg:grid-cols-2 max-sm:grid-cols-1">
+    {
+        testimonials.map((testimony) => (
+            <>
+                <TestimonialCard testimony={testimony} />
+                <TestimonialModal testimony={testimony} />
+            </>
+        ))
+    }
 </div>
 
 <script>
-    document.addEventListener("click", (e) => {
-        const target = e.target as HTMLElement;
-        if (!target) return;
+    const initTestimonials = () => {
+        document.addEventListener("click", (e) => {
+            const target = e.target as HTMLElement;
+            if (!target) return;
 
-        const trigger = target.closest("[data-testimonial-trigger]");
-        if (trigger) {
-            const id = trigger.getAttribute("data-testimonial-trigger");
-            const modal = document.getElementById(
-                `modal-${id}`,
-            ) as HTMLDialogElement;
-            modal?.showModal();
-            document.body.style.overflow = "hidden";
-            return;
-        }
+            {/* ----- Logic for opening the modal ----- */}
+            const trigger = target.closest("[data-testimonial-trigger]");
+            if (trigger) {
+                const id = trigger.getAttribute("data-testimonial-trigger");
+                const modal = document.getElementById(
+                    `modal-${id}`,
+                ) as HTMLDialogElement;
 
-        const closeBtn = target.closest("[data-testimonial-close]");
-        if (closeBtn) {
-            const id = closeBtn.getAttribute("data-testimonial-close");
-            const modal = document.getElementById(
-                `modal-${id}`,
-            ) as HTMLDialogElement;
-            modal?.close();
-            document.body.style.overflow = "";
-            return;
-        }
+                modal?.showModal();
+                document.body.classList.add("overflow-hidden");
+                return;
+            }
 
-        if (target.tagName === "DIALOG") {
-            (target as HTMLDialogElement).close();
-            document.body.style.overflow = "";
-        }
-    });
+            {/* ----- Logic for closing the modal ----- */}
+            const closeBtn = target.closest("[data-testimonial-close]");
+            const isBackdrop = target.tagName === "DIALOG";
+
+            if (closeBtn || isBackdrop) {
+                const modal = (
+                    closeBtn
+                        ? document.getElementById(
+                              `modal-${closeBtn.getAttribute("data-testimonial-close")}`,
+                          )
+                        : target
+                ) as HTMLDialogElement;
+
+                modal?.close();
+                document.body.classList.remove("overflow-hidden");
+            }
+        });
+
+        {/* ----- Logic for closing the modal with ESC key ----- */}
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape") {
+                document.body.classList.remove("overflow-hidden");
+            }
+        });
+    };
+
+    initTestimonials();
+    document.addEventListener("astro:page-load", initTestimonials);
 </script>

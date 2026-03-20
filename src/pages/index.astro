@@ -17,7 +17,8 @@ const testimonials = await getCollection("testimonials");
 
 <Layout title="Homepage">
     <main>
-        <Section id="intro" bg="bg-amber-50">
+        {/* ----- Intro ----- */}
+        <Section bg="bg-amber-50">
             <Title as="h1">Sewmii Pattern Studio</Title>
             <Text>
                 Sewmii Pattern Studio – Love sewing but not patternmaking? Our
@@ -28,12 +29,14 @@ const testimonials = await getCollection("testimonials");
                 fashion.
             </Text>
         </Section>
-        <Section id="new-launch">
-            <div class="flex gap-16 max-md:flex-col-reverse max-md:gap-8">
+
+        {/* ----- New Launch ----- */}
+        <Section>
+            <div class="flex gap-16 max-lg:flex-col-reverse max-lg:gap-8">
                 <div class="flex flex-col justify-center">
                     <Title
                         as="h3"
-                        class="text-lg text-blue-800 max-md:text-base"
+                        class="text-base text-blue-800 max-md:text-base"
                     >
                         NEW LAUNCH
                     </Title>
@@ -52,12 +55,26 @@ const testimonials = await getCollection("testimonials");
                     </Text>
                     <ButtonLink class="mt-4">View Item</ButtonLink>
                 </div>
-                <Image src={promoImg} alt="Temp alt" height={500} width={500} />
+                <Image
+                    src={promoImg}
+                    alt="Temp alt"
+                    height={500}
+                    width={500}
+                    class="aspect-square self-center"
+                />
             </div>
         </Section>
-        <Section id="services">
-            <div class="flex gap-16 max-md:flex-col max-md:gap-8">
-                <Image src={promoImg} alt="Temp alt" height={500} width={500} />
+
+        {/* ----- Services ----- */}
+        <Section>
+            <div class="flex gap-16 max-lg:flex-col max-lg:gap-8">
+                <Image
+                    src={promoImg}
+                    alt="Temp alt"
+                    height={500}
+                    width={500}
+                    class="aspect-square self-center"
+                />
                 <div class="flex flex-col justify-center">
                     <Title as="h2">Our Services</Title>
                     <Text class="mb-6">
@@ -67,28 +84,33 @@ const testimonials = await getCollection("testimonials");
                     <List
                         items={[
                             "Digital sewing patterns",
-                            "Physical sewing patterns*",
+                            "Physical sewing patterns ❖",
                             "Custom exclusive patterns",
                         ]}
                     />
-                    <Text class="text-sm text-gray-500">
-                        *Physical printed patterns exclusively on Shopee in the
-                        Philippines, Singapore, and Malaysia.
+                    <Text
+                        class="text-xs leading-tight font-bold tracking-widest text-gray-500 uppercase max-md:text-xs"
+                    >
+                        ❖ Physical patterns: PH / SG / MY via Shopee only.
                     </Text>
                     <ButtonLink class="mt-4">View Services</ButtonLink>
                 </div>
             </div>
         </Section>
-        <Section id="featured-products">
-            <div class="flex justify-between items-start max-md:flex-col">
-                <Title as="h2" class="mb-8"> Featured Products </Title>
-                <ButtonLink class="max-md:mb-6">View All</ButtonLink>
+
+        {/* ----- Featured Products ----- */}
+        <Section>
+            <div class="mb-12 flex items-center justify-between max-sm:mb-8 max-sm:flex-col max-sm:items-start max-sm:gap-2">
+                <Title as="h2" class="mb-0"> Featured Products </Title>
+                <ButtonLink class="mb-0">View All</ButtonLink>
             </div>
             <ProductsList products={products} />
         </Section>
-        <Section id="testimonials">
+
+        {/* ----- Testimonials ----- */}
+        <Section>
             <Title as="h2">Testimonials</Title>
-            <Text class="mb-8 max-md:mb-6">
+            <Text class="mb-12 max-md:mb-8">
                 Loved by customers who’ve tried our sewing patterns and designs.
             </Text>
             <TestimonialsList testimonials={testimonials} />

@@ -1,16 +1,18 @@
 ---
+import { twMerge } from "tailwind-merge";
+
 interface Props {
     as?: "h1" | "h2" | "h3" | "h4";
     class?: string;
 }
 
-const { as = "h2", class:className = "" } = Astro.props as Props;
+const { as = "h2", class: className = "" } = Astro.props as Props;
 
 const Tag = as;
 const baseClasses =
-    "text-5xl font-bold tracking-tight mb-6 max-sm:text-4xl max-sm:mb-4";
+    "text-5xl max-md:text-4xl font-bold tracking-tight mb-6 max-sm:mb-4";
 ---
 
-<Tag class={`${baseClasses} ${className}`}>
+<Tag class={twMerge(baseClasses, className)}>
     <slot />
 </Tag>

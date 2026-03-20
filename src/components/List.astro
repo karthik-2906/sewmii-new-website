@@ -6,10 +6,10 @@ interface Props {
 const { items, class: className = "" } = Astro.props;
 ---
 
-<ul class={`mb-4 flex flex-col gap-4 ${className}`}>
+<ul class={`mb-6 flex flex-col gap-4 ${className}`}>
     {
         items.map((item) => (
-            <li class="flex items-center gap-2 text-[1.1rem] font-medium leading-tight tracking-tight text-black/90">
+            <li class="flex items-center gap-2 text-[1.1rem] font-medium leading-tight tracking-tight text-primary">
                 <svg
                     viewBox="0 0 24 24"
                     width="24"

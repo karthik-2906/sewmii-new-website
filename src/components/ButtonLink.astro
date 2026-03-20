@@ -3,25 +3,23 @@ type Props = {
     class?: string;
     href?: string;
     target?: string;
-    draggable?: boolean;
 };
 
 const {
     class: className = "",
     href = "/",
     target = "_self",
-    draggable = false,
 } = Astro.props;
 
 const baseClasses =
-    "text-nowrap text-lg font-semibold w-max flex flex-col gap-1.5 border-3 border-black rounded-4xl bg-[#A3E635] px-4 py-2 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] select-none transition-all hover:translate-x-0.75 hover:translate-y-0.75 hover:shadow-none";
+    "flex w-max flex-col gap-1.5 rounded-4xl border-3 border-black bg-accent px-4 py-2 text-lg font-semibold text-nowrap shadow-brutal transition-all select-none hover:translate-x-0.75 hover:translate-y-0.75 hover:shadow-none";
 ---
 
 <a
     class={`${baseClasses} ${className}`}
     href={href}
     target={target}
-    draggable={draggable}
+    draggable=false
 >
     <slot />
 </a>
