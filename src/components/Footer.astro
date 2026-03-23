@@ -1,0 +1,105 @@
+---
+import { twMerge } from "tailwind-merge";
+import { Image } from "astro:assets";
+import logo from "../content/logos/sewmii-logo-rectangle.png";
+import Title from "./Title.astro";
+import Text from "./Text.astro";
+
+const navLinks = [
+    { name: "Home", href: "/" },
+    { name: "Products", href: "/products" },
+    { name: "Services", href: "/services" },
+    { name: "Calculator", href: "/calculator" },
+];
+
+const socialLinks = [
+    { name: "Instagram", href: "#" },
+    { name: "TikTok", href: "#" },
+    { name: "YouTube", href: "#" },
+    { name: "Etsy Shop", href: "#" },
+    { name: "Shopee", href: "#" },
+];
+
+const currentYear = new Date().getFullYear();
+
+const footerH4Class = "mb-4 text-[11px] font-black tracking-widest text-blue-800 max-md:text-[11px]";
+
+const footerAnchorClass =
+    "relative inline-block w-fit after:absolute after:bottom-0 after:left-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-primary after:transition-transform after:duration-300 hover:after:scale-x-100";
+---
+
+<footer class="bg-gray-200 animate-on-scroll">
+    <div class="mx-auto w-full max-w-7xl px-12 py-18 max-md:px-6 max-md:py-12">
+        <div
+            class="mb-20 grid grid-cols-[2fr_1fr_1fr] gap-16 max-lg:grid-cols-3 max-md:mb-12 max-md:grid-cols-1 max-md:gap-12"
+        >
+            {/* ----- Footer Left Column ----- */}
+            <div class="flex flex-col gap-6">
+                <a href="/" class="">
+                    <Image src={logo} alt="sewmii logo" class="h-20 w-auto max-lg:h-16 max-md:h-12" />
+                </a>
+                <div>
+                    <Text class="mb-6 max-w-sm text-base max-sm:mb-4"
+                        >Precision-engineered sewing patterns for the modern maker. Designed in the Philippines.</Text
+                    >
+
+                    <Title as="h4" class={footerH4Class}>CONTACT US</Title>
+                    <a
+                        href="mailto:info.sewmii@gmail.com"
+                        class={twMerge(footerAnchorClass, "text-xl font-bold")}
+                        target="_blank"
+                        draggable="false"
+                    >
+                        info.sewmii@gmail.com
+                    </a>
+                </div>
+            </div>
+
+            {/* ----- Footer Middle Column ----- */}
+            <div>
+                <Title as="h4" class={footerH4Class}> EXPLORE </Title>
+                <ul class="flex flex-col gap-4">
+                    {
+                        navLinks.map((link) => (
+                            <li>
+                                <a href={link.href} class={twMerge(footerAnchorClass, "text-xl font-bold")}>
+                                    {link.name}
+                                </a>
+                            </li>
+                        ))
+                    }
+                </ul>
+            </div>
+
+            {/* ----- Footer Right Column ----- */}
+            <div>
+                <Title as="h4" class={footerH4Class}> FOLLOW THE STUDIO </Title>
+                <ul class="flex flex-col gap-4">
+                    {
+                        socialLinks.map((social) => (
+                            <li>
+                                <a href={social.href} class={twMerge(footerAnchorClass, "text-xl font-bold")}>
+                                    {social.name}
+                                </a>
+                            </li>
+                        ))
+                    }
+                </ul>
+            </div>
+        </div>
+
+        {/* ----- Bottom Footer ----- */}
+        <div
+            class="flex flex-col items-center justify-between gap-6 border-t border-black pt-8 text-gray-500 md:flex-row"
+        >
+            <Text class="text-[10px] font-black tracking-widest max-md:text-[10px]">
+                © {currentYear} SEWMII PATTERN STUDIO.
+            </Text>
+            <div class="text-[10px] font-black tracking-widest uppercase">
+                <a href="/terms" class={footerAnchorClass}>Privacy Policy</a>
+                <span class="px-2">|</span>
+                <a href="/terms" class={footerAnchorClass}>Terms of Service</a>
+            </div>
+        </div>
+    </div>
+</footer>

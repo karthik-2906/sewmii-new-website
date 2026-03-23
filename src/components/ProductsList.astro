@@ -9,5 +9,5 @@ const { products } = Astro.props;
 ---
 
 <div class="grid grid-cols-3 gap-8 max-lg:grid-cols-2 max-sm:grid-cols-1">
-    {products.map((product) => <ProductCard product={product} />)}
+    {products.map((product, index) => <ProductCard product={product} style={`--delay: ${(index + 1) * 100}ms`} />)}
 </div>

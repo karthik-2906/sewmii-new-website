@@ -1,7 +1,9 @@
 ---
 import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
+import Section from "../components/Section.astro";
 import Title from "../components/Title.astro";
+import Text from "../components/Text.astro";
 import ProductsList from "../components/ProductsList.astro";
 
 const products = await getCollection("products");
@@ -9,9 +11,30 @@ const products = await getCollection("products");
 
 <Layout title="Product Page">
     <main>
-        <Title as="h1">Custom Plushies</Title>
-        <Title as="h2">Products</Title>
-        <Title as="h3">Small Plushies</Title>
-        <ProductsList products={products} />
+        {/* ----- All Products ----- */}
+        <Section class="bg-blue-50 animate-on-scroll">
+            <Title as="h2" class="mb-12 max-sm:mb-8"> All Products </Title>
+            <ProductsList products={products} />
+        </Section>
+
+        {/* ----- Custom Order ----- */}
+        <Section class="bg-green-50 animate-on-scroll">
+            <div
+                class="flex items-center justify-between gap-8 rounded-4xl bg-pink-400 p-16 max-md:flex-col max-md:items-start max-md:p-8"
+            >
+                <div class="flex flex-col justify-center">
+                    <Title as="h3" class="text-base text-blue-300 max-md:text-base">CUSTOM ORDERS</Title>
+                    <Title as="h2" class="text-white max-md:text-3xl">Can't find what you're looking for?</Title>
+                    <Text class="mb-0 text-white">Request a custom exclusive pattern tailored to your design.</Text>
+                </div>
+                <a
+                    class="rounded-lg bg-primary px-4 py-2 text-xl font-semibold whitespace-nowrap text-background shadow-brutal-secondary transition-all hover:translate-x-0.75 hover:translate-y-0.75 hover:shadow-none max-md:w-full max-md:justify-center max-md:text-center"
+                    href="/services"
+                    draggable="false"
+                >
+                    View Services
+                </a>
+            </div>
+        </Section>
     </main>
 </Layout>

@@ -1,7 +1,9 @@
 ---
 import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
-import promoImg from "../content/products/images/ophelia-corset/ophelia-corset-tech-drawing.jpg";
+import opheliaBanner from "../content/products/images/ophelia-corset/ophelia-corset-banner.png";
+import opheliaPattern from "../content/products/images/ophelia-corset/ophelia-corset-pattern.jpg";
+import promoImg from "../content/products/images/ophelia-corset/ophelia-corset-front.jpg";
 import Layout from "../layouts/Layout.astro";
 import Section from "../components/Section.astro";
 import Title from "../components/Title.astro";
@@ -17,76 +19,95 @@ const testimonials = await getCollection("testimonials");
 
 <Layout title="Homepage">
     <main>
-        {/* ----- Intro ----- */}
-        <Section bg="bg-amber-50">
-            <Title as="h1">Sewmii Pattern Studio</Title>
-            <Text>
-                Sewmii Pattern Studio – Love sewing but not patternmaking? Our
-                beginner-friendly digital and printed sewing patterns make it
-                easy to create beautiful clothing at home or for your garment
-                business. Designed by a pattern maker from the Philippines, each
-                pattern is ready to sew, easy to follow, and perfect for DIY
-                fashion.
-            </Text>
-        </Section>
+        {/* ----- Banner ----- */}
+        <section class="relative">
+            <Image
+                src={opheliaBanner}
+                alt="Ophelia Corset New Launch Hero"
+                height={1080}
+                width={1920}
+                class="w-full max-md:h-100 h-[calc(100vh-128px)] object-cover"
+                loading="eager"
+                fetchpriority="high"
+            />
 
-        {/* ----- New Launch ----- */}
-        <Section>
-            <div class="flex gap-16 max-lg:flex-col-reverse max-lg:gap-8">
-                <div class="flex flex-col justify-center">
-                    <Title
-                        as="h3"
-                        class="text-base text-blue-800 max-md:text-base"
-                    >
-                        NEW LAUNCH
-                    </Title>
-                    <Title as="h2">Ophelia Corset</Title>
-                    <Text>
-                        Ophelia Corset is a timeless sewing pattern designed to
-                        celebrate classic femininity with a beautifully sculpted
-                        silhouette. Featuring a thoughtfully contoured waist,
-                        Ophelia creates an elegant cinch that enhances natural
-                        curves and delivers a refined hourglass shape. The
-                        design balances structure and softness, making it
-                        flattering, versatile, and effortlessly graceful.
-                        Perfect for sewists who love enduring style with a touch
-                        of drama, Ophelia Corset is a pattern that feels both
-                        iconic and timeless.
+            {/* ----- Overlay ----- */}
+            <div class="absolute inset-0 bg-black/30" aria-hidden="true"></div>
+
+            {/* ----- Banner Text Content ----- */}
+            <div class="absolute inset-0 z-10 flex items-center">
+                <div class="mx-auto w-full max-w-7xl px-12 py-24 max-md:p-6 max-md:max-w-72 max-md:m-0">
+                    <div class="flex max-w-xl flex-col justify-center">
+                        <Title
+                            as="h3"
+                            class="text-base text-yellow-200 drop-shadow-[1px_1px_0px_rgba(0,0,0,1)] max-md:text-base"
+                        >
+                            NEW LAUNCH
+                        </Title>
+                        <Title as="h2" class="text-white drop-shadow-[1px_1px_0px_rgba(0,0,0,1)] max-md:text-3xl"
+                            >Ophelia Corset</Title
+                        >
+                        <Text class="text-white drop-shadow-[1px_1px_0px_rgba(0,0,0,1)]">
+                            A timeless sewing pattern featuring a beautifully sculpted silhouette and elegant cinched
+                            waist. Designed for enduring style with a touch of drama.
+                        </Text>
+                        <ButtonLink class="mt-4">View Item</ButtonLink>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        {/* ----- Intro ----- */}
+        <Section class="bg-purple-50">
+            <div class="flex gap-16 max-lg:flex-col max-lg:gap-8">
+                <div class="flex flex-col justify-center animate-on-scroll">
+                    <Title as="h1">Sewmii Pattern Studio</Title>
+                    <Text class="mb-0 max-md:mb-0">
+                        Sewmii Pattern Studio – Love sewing but not patternmaking? Our beginner-friendly digital and
+                        printed sewing patterns make it easy to create beautiful clothing at home or for your garment
+                        business. Designed by a pattern maker from the Philippines, each pattern is ready to sew, easy
+                        to follow, and perfect for DIY fashion.
                     </Text>
-                    <ButtonLink class="mt-4">View Item</ButtonLink>
                 </div>
                 <Image
-                    src={promoImg}
+                    src={opheliaPattern}
                     alt="Temp alt"
                     height={500}
                     width={500}
-                    class="aspect-square self-center"
+                    class="aspect-video object-cover rounded-4xl border-3 border-black shadow-brutal animate-on-scroll"
+                    style="--delay: 100ms;"
                 />
             </div>
         </Section>
 
+        {/* ----- Featured Products ----- */}
+        <Section class="bg-blue-50 animate-on-scroll">
+            <div
+                class="mb-12 flex items-center justify-between max-sm:mb-8 max-sm:flex-col max-sm:items-start max-sm:gap-2"
+            >
+                <Title as="h2" class="mb-0"> Featured Products </Title>
+                <ButtonLink class="mb-0">View All</ButtonLink>
+            </div>
+            <ProductsList products={products} />
+        </Section>
+
         {/* ----- Services ----- */}
-        <Section>
+        <Section class="bg-pink-50">
             <div class="flex gap-16 max-lg:flex-col max-lg:gap-8">
                 <Image
                     src={promoImg}
                     alt="Temp alt"
                     height={500}
                     width={500}
-                    class="aspect-square self-center"
+                    class="aspect-square self-center rounded-4xl border-3 border-black shadow-brutal animate-on-scroll"
                 />
-                <div class="flex flex-col justify-center">
+                <div class="flex flex-col justify-center animate-on-scroll" style="--delay: 100ms;">
                     <Title as="h2">Our Services</Title>
                     <Text class="mb-6">
-                        We offer a wide array of services to help bring your
-                        creative ideas to life.
+                        We offer a wide array of services to help bring your creative ideas to life.
                     </Text>
                     <List
-                        items={[
-                            "Digital sewing patterns",
-                            "Physical sewing patterns ❖",
-                            "Custom exclusive patterns",
-                        ]}
+                        items={["Digital sewing patterns", "Physical sewing patterns ❖", "Custom exclusive patterns"]}
                     />
                     <Text
                         class="text-xs leading-tight font-bold tracking-widest text-gray-500 uppercase max-md:text-xs"
@@ -98,21 +119,31 @@ const testimonials = await getCollection("testimonials");
             </div>
         </Section>
 
-        {/* ----- Featured Products ----- */}
-        <Section>
-            <div class="mb-12 flex items-center justify-between max-sm:mb-8 max-sm:flex-col max-sm:items-start max-sm:gap-2">
-                <Title as="h2" class="mb-0"> Featured Products </Title>
-                <ButtonLink class="mb-0">View All</ButtonLink>
+        {/* ----- Stats ----- */}
+        <Section class="bg-green-50">
+            <div class="grid grid-cols-3 divide-x-4 text-center max-md:grid-cols-1 max-md:divide-x-0 max-md:divide-y-4">
+                <div class="px-12 py-8 md:py-0 animate-on-scroll" style="--delay: 100ms;">
+                    <Title as="h3" class="max-md:text-4xl">10</Title>
+                    <Title as="h4" class="text-2xl font-medium max-md:text-xl">Years Experience</Title>
+                    <Text class="mb-0">Trusted expertise in pattern making</Text>
+                </div>
+                <div class="px-12 py-8 md:py-0 animate-on-scroll" style="--delay: 200ms;">
+                    <Title as="h3" class="max-md:text-4xl">1,000+</Title>
+                    <Title as="h4" class="text-2xl font-medium max-md:text-xl">Orders Fulfilled</Title>
+                    <Text class="mb-0">Happy sewers worldwide</Text>
+                </div>
+                <div class="px-12 py-8 md:py-0 animate-on-scroll" style="--delay: 200ms;">
+                    <Text class="text-xl content-center h-12 max-md:text-xl max-mg:h-unset">⭐⭐⭐⭐⭐</Text>
+                    <Title as="h4" class="text-2xl font-medium max-md:text-xl">Rated 5 / 5</Title>
+                    <Text class="mb-0">Across Etsy & Shopee</Text>
+                </div>
             </div>
-            <ProductsList products={products} />
         </Section>
 
         {/* ----- Testimonials ----- */}
-        <Section>
+        <Section class="animate-on-scroll">
             <Title as="h2">Testimonials</Title>
-            <Text class="mb-12 max-md:mb-8">
-                Loved by customers who’ve tried our sewing patterns and designs.
-            </Text>
+            <Text class="mb-12 max-md:mb-8"> Loved by customers who’ve tried our sewing patterns and designs. </Text>
             <TestimonialsList testimonials={testimonials} />
         </Section>
     </main>

@@ -2,23 +2,19 @@
 import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
+import Section from "../../components/Section.astro";
 import Title from "../../components/Title.astro";
+import Text from "../../components/Text.astro";
+import ProductsList from "../../components/ProductsList.astro";
+
+const products = await getCollection("products");
 
 export const getStaticPaths = async () => {
     const products = await getCollection("products");
-
-    const paths = products.map((product) => {
-        return {
-            params: {
-                slug: product.data.slug,
-            },
-            props: {
-                product,
-            },
-        };
-    });
-
-    return paths;
+    return products.map((product) => ({
+        params: { slug: product.data.slug },
+        props: { product },
+    }));
 };
 
 type Props = {
@@ -26,12 +22,22 @@ type Props = {
 };
 
 const { product } = Astro.props;
+const otherProducts = products.filter((p) => p.data.slug !== product.data.slug);
 ---
 
 <Layout title={product.data.title}>
     <main>
-        <Title>{product.data.title}</Title>
-        <p>{product.data.shortDescription}</p>
-        <p>${product.data.price}</p>
+        <Section>
+            <Title>{product.data.title}</Title>
+            <p>{product.data.shortDescription}</p>
+            <p>${product.data.price}</p>
+        </Section>
+
+        {/* ----- Other Products ----- */}
+        <Section class="animate-on-scroll">
+            <Title as="h2">Other Products</Title>
+            <Text class="mb-12 max-md:mb-8">Three ways to get your hands on a sewmii pattern</Text>
+            <ProductsList products={otherProducts} />
+        </Section>
     </main>
 </Layout>

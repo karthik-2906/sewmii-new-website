@@ -1,13 +1,44 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui;
+    --font-sans: var(--font-inter), ui-sans-serif, system-ui;
 
-  --color-background: #FFFFFF;
-  /* --color-background: #FFFF0F; */
-  --color-primary: #000000;
-  --color-accent: #A3E635;
-  
-  --shadow-brutal: 3px 3px 0px 0px rgba(0,0,0,1);
-  --shadow-brutal-secondary: 3px 3px 0px 0px rgba(255,255,255,1);
+    --color-background: #ffffff;
+    --color-primary: #000000;
+    --color-accent: #a3e635;
+
+    --shadow-brutal: 3px 3px 0px 0px rgba(0, 0, 0, 1);
+    --shadow-brutal-secondary: 3px 3px 0px 0px rgba(255, 255, 255, 1);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+.animate-on-scroll {
+    opacity: 0;
+    translate: 0 20px;
+    transition:
+        opacity 0.6s ease,
+        translate 0.6s ease;
+    transition-delay: var(--delay, 0ms);
+}
+
+.animate-on-scroll.visible {
+    opacity: 1;
+    translate: 0 0;
+}
+
+@media (max-width: 1024px) {
+    .animate-on-scroll {
+        transition-delay: 0ms;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .animate-on-scroll {
+        opacity: 1;
+        translate: 0 0;
+        transition: none;
+    }
 }

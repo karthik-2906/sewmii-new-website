@@ -13,6 +13,7 @@ const productsCollection = defineCollection({
             description: z.string(),
             image: image(),
             imageHover: image(),
+            imageCarousel: z.array(z.string())
         }),
 });
 

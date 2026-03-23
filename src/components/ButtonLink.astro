@@ -1,25 +1,24 @@
 ---
+import { twMerge } from "tailwind-merge";
+
 type Props = {
     class?: string;
     href?: string;
     target?: string;
+    variant?: "default" | "ghost";
 };
 
-const {
-    class: className = "",
-    href = "/",
-    target = "_self",
-} = Astro.props;
+const { class: className = "", href = "/", target = "_self", variant = "default" } = Astro.props;
 
 const baseClasses =
-    "flex w-max flex-col gap-1.5 rounded-4xl border-3 border-black bg-accent px-4 py-2 text-lg font-semibold text-nowrap shadow-brutal transition-all select-none hover:translate-x-0.75 hover:translate-y-0.75 hover:shadow-none";
+    "flex w-max rounded-4xl border-3 px-4 py-2 text-lg font-semibold text-nowrap transition-all select-none";
+
+const variants = {
+    default: "border-black bg-accent shadow-brutal hover:translate-x-0.75 hover:translate-y-0.75 hover:shadow-none",
+    ghost: "w-full justify-center border-white text-white hover:opacity-75",
+};
 ---
 
-<a
-    class={`${baseClasses} ${className}`}
-    href={href}
-    target={target}
-    draggable=false
->
+<a class={twMerge(baseClasses, variants[variant], className)} href={href} target={target} draggable="false">
     <slot />
 </a>

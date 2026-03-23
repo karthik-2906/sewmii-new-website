@@ -1,20 +1,23 @@
 ---
 import Text from "./Text.astro";
-const { testimony } = Astro.props;
-const id = testimony.id;
+import { type CollectionEntry } from "astro:content";
 
+type Props = {
+    testimony: CollectionEntry<"testimonials">;
+    style?: string;
+};
+
+const { testimony, style } = Astro.props;
+const id = testimony.id;
 const baseClasses =
-    "flex cursor-pointer flex-col rounded-4xl border-3 border-primary bg-accent p-4 shadow-brutal";
+    "flex cursor-pointer flex-col rounded-4xl border-3 border-primary bg-accent p-4 shadow-brutal animate-on-scroll";
 ---
 
-<div class={baseClasses} data-testimonial-trigger={id}>
-
+<div class={baseClasses} data-testimonial-trigger={id} {style}>
     {/* ----- Testimony Card Header ----- */}
     <div class="mb-4 flex items-center justify-between gap-4 max-sm:flex-wrap">
         <div class="text-2xl leading-none">★★★★★</div>
-        <div
-            class="flex items-center gap-1 rounded-full border-2 border-primary bg-background px-3 py-1 shadow-brutal"
-        >
+        <div class="flex items-center gap-1 rounded-full border-2 border-primary bg-background px-3 py-1 shadow-brutal">
             <span class="text-xs text-orange-500">❖</span>
             <p class="text-[10px] font-black tracking-tight">
                 VERIFIED {testimony.data.shop.toUpperCase()} PURCHASE

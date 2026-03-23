@@ -2,15 +2,15 @@
 import { twMerge } from "tailwind-merge";
 
 type Props = {
-  class?: string;
+    class?: string;
+    style?: string;
 };
 
-const { class: className = "" } = Astro.props;
+const { class: className, style } = Astro.props;
 
-const baseClasses =
-  "text-lg font-medium tracking-tight mb-4 max-md:text-base";
+const baseClasses = "text-lg font-medium tracking-tight mb-4 max-md:text-base";
 ---
 
-<p class={twMerge(baseClasses, className)}>
-  <slot />
+<p class={twMerge(baseClasses, className)} {style}>
+    <slot />
 </p>

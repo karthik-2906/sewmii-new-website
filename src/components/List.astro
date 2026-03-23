@@ -1,4 +1,5 @@
 ---
+import { twMerge } from "tailwind-merge";
 interface Props {
     items: string[];
     class?: string;
@@ -6,15 +7,11 @@ interface Props {
 const { items, class: className = "" } = Astro.props;
 ---
 
-<ul class={`mb-6 flex flex-col gap-4 ${className}`}>
+<ul class={twMerge("mb-6 flex flex-col gap-4", className)}>
     {
         items.map((item) => (
             <li class="flex items-center gap-2 text-[1.1rem] font-medium leading-tight tracking-tight text-primary">
-                <svg
-                    viewBox="0 0 24 24"
-                    width="24"
-                    height="24"
-                >
+                <svg viewBox="0 0 24 24" width="24" height="24">
                     <circle cx="12" cy="12" r="9" fill="black" />
                     <circle cx="9" cy="9" r="1.8" fill="white" />
                     <circle cx="15" cy="9" r="1.8" fill="white" />

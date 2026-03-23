@@ -4,44 +4,41 @@ import { Image } from "astro:assets";
 
 type Props = {
     product: CollectionEntry<"products">;
+    style: string;
 };
 
-const { product } = Astro.props;
+const { product, style } = Astro.props;
 
 const baseClasses =
-    "flex flex-col overflow-hidden rounded-4xl border-3 border-primary bg-accent shadow-brutal";
+    "flex flex-col overflow-hidden rounded-4xl border-3 border-primary bg-accent shadow-brutal animate-on-scroll";
 ---
 
-<div class={baseClasses}>
-    <a href={`/products/${product.data.slug}`} class="group block">
-        {/* ----- Product Card Image ----- */}
-        <div
-            class="relative w-full aspect-square border-b-3 border-primary overflow-hidden"
-        >
-            <Image
-                src={product.data.image}
-                width={600}
-                height={600}
-                alt={product.data.title}
-                class="absolute inset-0 object-cover"
-            />
-            {
-                product.data.imageHover && (
-                    <Image
-                        src={product.data.imageHover}
-                        width={600}
-                        height={600}
-                        alt={`${product.data.title} alternate view`}
-                        class="absolute inset-0 object-cover opacity-0 transition-opacity group-hover:opacity-100"
-                    />
-                )
-            }
-        </div>
+<a href={`/products/${product.data.slug}`} class={baseClasses} {style}>
+    {/* ----- Product Card Image ----- */}
+    <div class="relative w-full aspect-square border-b-3 border-primary overflow-hidden group">
+        <Image
+            src={product.data.image}
+            width={600}
+            height={600}
+            alt={product.data.title}
+            class="absolute inset-0 object-cover"
+        />
+        {
+            product.data.imageHover && (
+                <Image
+                    src={product.data.imageHover}
+                    width={600}
+                    height={600}
+                    alt={`${product.data.title} alternate view`}
+                    class="absolute inset-0 object-cover opacity-0 transition-opacity group-hover:opacity-100"
+                />
+            )
+        }
+    </div>
 
-        {/* ----- Product Card Text Container ----- */}
-        <div class="flex flex-col gap-2 p-4">
-            <h2 class="text-xl font-semibold">{product.data.title}</h2>
-            <p class="line-clamp-2 text-sm">{product.data.shortDescription}</p>
-        </div>
-    </a>
-</div>
+    {/* ----- Product Card Text Container ----- */}
+    <div class="flex flex-col gap-2 p-4">
+        <h2 class="text-xl font-semibold">{product.data.title}</h2>
+        <p class="line-clamp-2 text-sm">{product.data.shortDescription}</p>
+    </div>
+</a>

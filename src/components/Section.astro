@@ -1,12 +1,13 @@
 ---
 type Props = {
-    bg?: string;
+    class?: string;
+    id?:string;
 };
 
-const { bg = "bg-background" } = Astro.props;
+const { class: className = "bg-background", id } = Astro.props;
 ---
 
-<section class={bg}>
+<section class={className} {id}>
     <div class="mx-auto w-full max-w-7xl px-12 py-24 max-md:px-6 max-md:py-12">
         <slot />
     </div>

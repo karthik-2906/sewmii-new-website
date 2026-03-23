@@ -1,12 +1,231 @@
 ---
+import { Image } from "astro:assets";
+import opheliaPattern from "../content/products/images/ophelia-corset/ophelia-corset-pattern.jpg";
 import Layout from "../layouts/Layout.astro";
 import Title from "../components/Title.astro";
+import Text from "../components/Text.astro";
+import ButtonLink from "../components/ButtonLink.astro";
+import Section from "../components/Section.astro";
+import ServiceCard from "../components/ServiceCard.astro";
+
+const services = [
+    {
+        title: "Digital Patterns",
+        description:
+            "Download your pattern instantly after purchase. Print at home or at a print shop. Available worldwide.",
+        features: ["Instant PDF download", "A4 & US Letter sizes", "Available worldwide", "Includes instructions"],
+        buttonText: "Shop on Etsy",
+        buttonHref: "/products",
+        bg: "bg-accent",
+    },
+    {
+        title: "Printed Patterns",
+        description:
+            "Get a professionally printed pattern shipped straight to you. Available via Shopee in select regions.",
+        features: ["Professionally printed", "Ready to cut & sew", "PH / SG / MY only", "Via Shopee"],
+        buttonText: "Shop on Shopee",
+        buttonHref: "https://shopee.com/...",
+        bg: "bg-white",
+    },
+    {
+        title: "Custom Patterns",
+        description:
+            "Need something unique? We'll draft a pattern exclusively for you based on your measurements and design.",
+        features: ["Made to your measurements", "Unique exclusive design", "Direct communication"],
+        buttonText: "Get Pricing",
+        buttonHref: "/services#pricing",
+        bg: "bg-pink-100",
+    },
+];
+
+const customPatterns = [
+    {
+        title: "Top",
+        description: "Blouses, shirts, corsets, boleros",
+        price: 100,
+        additionalSize: 10,
+    },
+    {
+        title: "Bottom",
+        description: "Skirts, trousers, shorts",
+        price: 100,
+        additionalSize: 10,
+    },
+    {
+        title: "Dress / Coordinates",
+        description: "Dresses, jumpsuits, sets",
+        price: 200,
+        additionalSize: 20,
+    },
+];
+
+const steps = [
+    {
+        number: "01",
+        title: "Get in touch",
+        description: "Send us your measurements and design idea via email or Instagram DM.",
+    },
+    {
+        number: "02",
+        title: "Consultation",
+        description: "We'll discuss your design, fabric, and any special requirements.",
+    },
+    {
+        number: "03",
+        title: "Drafting",
+        description: "Your pattern is drafted from scratch based on your exact measurements.",
+    },
+    {
+        number: "04",
+        title: "Delivery",
+        description: "Your finished pattern is delivered digitally, ready to print and sew.",
+    },
+];
 ---
 
 <Layout title="Services Page">
     <main>
-        <Title as="h1">Custom Plushies</Title>
-        <Title as="h2">Products</Title>
-        <Title as="h3">Small Plushies</Title>
+        {/* ----- Banner ----- */}
+        <section class="relative">
+            <Image
+                src={opheliaPattern}
+                alt="Ophelia Corset New Launch Hero"
+                height={1080}
+                width={1920}
+                class="w-full max-md:h-100 h-[calc(100vh-128px)] object-cover"
+                loading="eager"
+                fetchpriority="high"
+            />
+
+            {/* ----- Overlay ----- */}
+            <div class="absolute inset-0 bg-black/30" aria-hidden="true"></div>
+
+            {/* ----- Banner Text Content ----- */}
+            <div class="absolute inset-0 z-10 flex items-center">
+                <div class="mx-auto w-full max-w-7xl px-12 py-24 max-md:p-6 max-md:max-w-72 max-md:m-0">
+                    <div class="flex max-w-xl flex-col justify-center">
+                        <Title
+                            as="h3"
+                            class="text-base text-yellow-200 drop-shadow-[1px_1px_0px_rgba(0,0,0,1)] max-md:text-base"
+                        >
+                            OUR SERVICES
+                        </Title>
+                        <Title as="h2" class="text-white drop-shadow-[1px_1px_0px_rgba(0,0,0,1)] max-md:text-3xl"
+                            >Patterns made for everyone</Title
+                        >
+                        <Text class="text-white drop-shadow-[1px_1px_0px_rgba(0,0,0,1)]">
+                            Whether you need a digital download, a printed pattern shipped to your door, or something completely unique — we've got you covered.
+                        </Text>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        {/* ----- What we Offer ----- */}
+        <Section class="animate-on-scroll">
+            <Title as="h2">What we Offer</Title>
+            <Text class="mb-12 max-md:mb-8">Three ways to get your hands on a sewmii pattern</Text>
+            <div class="grid grid-cols-3 gap-8 max-lg:grid-cols-1">
+                {
+                    services.map((service, index) => (
+                        <ServiceCard
+                            title={service.title}
+                            description={service.description}
+                            features={service.features}
+                            buttonText={service.buttonText}
+                            buttonHref={service.buttonHref}
+                            class={service.bg}
+                            style={`--delay: ${(index + 1) * 100}ms`}
+                        />
+                    ))
+                }
+            </div>
+        </Section>
+
+        {/* ----- Custom Pricing ----- */}
+        <Section class="animate-on-scroll scroll-mt-24" id="pricing">
+            <div class="flex items-start gap-12 max-lg:flex-col">
+
+                {/* ----- Custom Pricing Left Container ----- */}
+                <div class="flex flex-1 flex-col">
+                    <Title as="h3" class="text-base text-accent max-md:text-base">CUSTOM PRICING</Title>
+                    <Title as="h2">How much does a custom pattern cost?</Title>
+                    <Text class="mb-12 max-md:mb-8">
+                        Pricing varies based on the complexity of the garment. All custom patterns are drafted from your
+                        measurements and include detailed instructions.
+                    </Text>
+                    <div class="flex flex-col gap-8">
+                        {
+                            customPatterns.map((pattern, index) => (
+                                <div
+                                    class="animate-on-scroll flex items-center justify-between rounded-4xl border-3 border-primary p-6 shadow-brutal max-sm:gap-2"
+                                    style={`--delay: ${(index + 1) * 100}ms`}
+                                >
+                                    <div class="max-sm:flex-4">
+                                        <Title as="h4" class="tmb-2 text-2xl max-md:mb-2 max-md:text-xl">
+                                            {pattern.title}
+                                        </Title>
+                                        <Text class="mb-0">{pattern.description}</Text>
+                                    </div>
+                                    <div class="text-right max-sm:flex-3">
+                                        <Title as="h3" class="mb-2 text-2xl max-md:mb-2 max-md:text-xl">
+                                            ${pattern.price}
+                                        </Title>
+                                        <Text class="mb-0">+ ${pattern.additionalSize} per additional size</Text>
+                                    </div>
+                                </div>
+                            ))
+                        }
+                    </div>
+                </div>
+
+                {/* ----- Custom Pricing Right Container ----- */}
+                <div
+                    class="animate-on-scroll flex w-120 shrink-0 flex-col rounded-4xl bg-primary p-10 max-lg:w-full max-md:p-6"
+                    style={`--delay: 100ms`}
+                >
+                    <Title as="h3" class="text-base text-accent max-md:text-base">READY TO ORDER?</Title>
+                    <Title as="h3" class="text-white max-md:text-2xl"
+                        >Reach out and let's make something together.</Title
+                    >
+                    <Text class="text-gray-400">Send us a message on Instagram or email us directly.</Text>
+                    <div class="mt-2 flex flex-col gap-4">
+                        <ButtonLink href="https://instagram.com/sewmii" variant="ghost">Instagram</ButtonLink>
+                        <ButtonLink
+                            href="mailto:info.sewmii@gmail.com"
+                            class="border-accent bg-accent text-primary"
+                            variant="ghost">Email Us</ButtonLink
+                        >
+                    </div>
+                </div>
+            </div>
+        </Section>
+
+        {/* ----- How it Works ----- */}
+        <Section class="animate-on-scroll">
+            <Title as="h2">How it Works</Title>
+            <Text class="mb-12 max-md:mb-8">The custom pattern process, step by step.</Text>
+            <div class="grid grid-cols-4 gap-8 max-lg:grid-cols-2 max-sm:grid-cols-1">
+                {
+                    steps.map((step, index) => (
+                        <div
+                            class:list={[
+                                "animate-on-scroll flex flex-col rounded-4xl border-3 border-primary p-8 shadow-brutal max-md:p-6",
+                                index === 3 ? "bg-accent" : "bg-white",
+                            ]}
+                            style={`--delay: ${(index + 1) * 100}ms`}
+                        >
+                            <p class:list={["mb-4 text-4xl font-black max-md:text-3xl", index === 3 ? "text-primary" : "text-accent"]}>
+                                {step.number}
+                            </p>
+                            <Title as="h4" class="text-2xl max-md:text-xl">
+                                {step.title}
+                            </Title>
+                            <Text>{step.description}</Text>
+                        </div>
+                    ))
+                }
+            </div>
+        </Section>
     </main>
-</Layout>;
+</Layout>

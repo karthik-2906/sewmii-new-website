@@ -27,11 +27,9 @@ const baseClasses =
         ✕
     </button>
 
-    <div class={`${baseClasses}`}>
+    <div class={baseClasses}>
         {/* ----- Testimonial Modal Image ----- */}
-        <div
-            class="aspect-square flex-1 overflow-hidden rounded-2xl border-3 border-primary bg-background"
-        >
+        <div class="aspect-square flex-1 overflow-hidden rounded-2xl border-3 border-primary bg-background">
             <Image
                 src={tempImage}
                 alt={`Review for ${testimony.data.shop}`}
@@ -42,9 +40,7 @@ const baseClasses =
 
         <div class="flex flex-1 flex-col max-lg:flex-2">
             {/* ----- Testimonial Modal Header ----- */}
-            <div
-                class="mb-4 flex items-center justify-between gap-4 max-sm:flex-wrap"
-            >
+            <div class="mb-4 flex items-center justify-between gap-4 max-sm:flex-wrap">
                 <div class="text-2xl leading-none">★★★★★</div>
                 <div
                     class="flex items-center gap-1 rounded-full border-2 border-primary bg-background px-3 py-1 shadow-brutal"
@@ -57,16 +53,12 @@ const baseClasses =
             </div>
 
             {/* ----- Testimonial Modal Review ----- */}
-            <Text
-                class="max-md:max-h-56 max-sm:overflow-y-auto max-sm:text-base sm:text-base"
-            >
+            <Text class="max-md:max-h-56 max-sm:overflow-y-auto max-sm:text-base sm:text-base">
                 “{testimony.data.review}”
             </Text>
 
             {/* ----- Testimonial Modal Footer ----- */}
-            <div
-                class="mt-auto flex items-center justify-between border-t border-black/20 pt-4"
-            >
+            <div class="mt-auto flex items-center justify-between border-t border-black/20 pt-4">
                 <span class="text-sm font-semibold">
                     — {testimony.data.name}
                 </span>

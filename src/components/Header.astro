@@ -39,9 +39,7 @@ const navAnchorClass =
             <span
                 class="h-1 w-6 origin-center bg-primary transition-all duration-300 group-data-open:translate-y-2.5 group-data-open:rotate-45"
             ></span>
-            <span
-                class="h-1 w-6 bg-primary transition-all duration-300 group-data-open:opacity-0"
-            ></span>
+            <span class="h-1 w-6 bg-primary transition-all duration-300 group-data-open:opacity-0"></span>
             <span
                 class="h-1 w-6 origin-center bg-primary transition-all duration-300 group-data-open:-translate-y-2.5 group-data-open:-rotate-45"
             ></span>
@@ -53,9 +51,7 @@ const navAnchorClass =
             class="flex items-center gap-8 transition-transform duration-300 ease-in-out max-md:fixed max-md:top-24 max-md:right-0 max-md:z-40 max-md:h-[calc(100dvh-6rem)] max-md:w-full max-md:translate-x-full max-md:flex-col max-md:justify-between max-md:bg-background max-md:p-6"
         >
             {/* ----- Navigation Links ----- */}
-            <ul
-                class="flex w-full gap-x-8 max-md:flex-col max-md:border-t-2 max-md:border-primary"
-            >
+            <ul class="flex w-full gap-x-8 max-md:flex-col max-md:border-t-2 max-md:border-primary">
                 {
                     navLinks.map((link) => (
                         <li class={navLiClass}>
@@ -68,13 +64,7 @@ const navAnchorClass =
             </ul>
 
             {/* ----- Header Button Link ----- */}
-            <ButtonLink
-                class="max-md:text-[1.75rem]"
-                href="google.com"
-                target="_blank"
-            >
-                Shop Now
-            </ButtonLink>
+            <ButtonLink class="max-md:text-[1.75rem]" href="google.com" target="_blank"> Shop Now </ButtonLink>
         </nav>
     </div>
 </header>
@@ -89,7 +79,9 @@ const navAnchorClass =
 
         if (!mainHeader || !btn) return;
 
-        {/* ----- Logic for reducing header size on scroll ----- */}
+        {
+            /* ----- Logic for reducing header size on scroll ----- */
+        }
         window.addEventListener("scroll", () => {
             const isScrolled = window.scrollY > 50;
 
@@ -103,7 +95,9 @@ const navAnchorClass =
             logo?.classList.toggle("h-16", !isScrolled);
         });
 
-        {/* ----- Logic for mobile hamburger menu ----- */}
+        {
+            /* ----- Logic for mobile hamburger menu ----- */
+        }
         btn.addEventListener("click", () => {
             const isOpening = !btn.hasAttribute("data-open");
 

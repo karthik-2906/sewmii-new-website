@@ -12,9 +12,9 @@ const { testimonials } = Astro.props;
 
 <div class="grid grid-cols-3 gap-8 max-lg:grid-cols-2 max-sm:grid-cols-1">
     {
-        testimonials.map((testimony) => (
+        testimonials.map((testimony, index) => (
             <>
-                <TestimonialCard testimony={testimony} />
+                <TestimonialCard testimony={testimony} style={`--delay: ${((index % 3) + 1) * 100}ms`} />
                 <TestimonialModal testimony={testimony} />
             </>
         ))
@@ -27,29 +27,29 @@ const { testimonials } = Astro.props;
             const target = e.target as HTMLElement;
             if (!target) return;
 
-            {/* ----- Logic for opening the modal ----- */}
+            {
+                /* ----- Logic for opening the modal ----- */
+            }
             const trigger = target.closest("[data-testimonial-trigger]");
             if (trigger) {
                 const id = trigger.getAttribute("data-testimonial-trigger");
-                const modal = document.getElementById(
-                    `modal-${id}`,
-                ) as HTMLDialogElement;
+                const modal = document.getElementById(`modal-${id}`) as HTMLDialogElement;
 
                 modal?.showModal();
                 document.body.classList.add("overflow-hidden");
                 return;
             }
 
-            {/* ----- Logic for closing the modal ----- */}
+            {
+                /* ----- Logic for closing the modal ----- */
+            }
             const closeBtn = target.closest("[data-testimonial-close]");
             const isBackdrop = target.tagName === "DIALOG";
 
             if (closeBtn || isBackdrop) {
                 const modal = (
                     closeBtn
-                        ? document.getElementById(
-                              `modal-${closeBtn.getAttribute("data-testimonial-close")}`,
-                          )
+                        ? document.getElementById(`modal-${closeBtn.getAttribute("data-testimonial-close")}`)
                         : target
                 ) as HTMLDialogElement;
 
@@ -58,7 +58,9 @@ const { testimonials } = Astro.props;
             }
         });
 
-        {/* ----- Logic for closing the modal with ESC key ----- */}
+        {
+            /* ----- Logic for closing the modal with ESC key ----- */
+        }
         document.addEventListener("keydown", (e) => {
             if (e.key === "Escape") {
                 document.body.classList.remove("overflow-hidden");
