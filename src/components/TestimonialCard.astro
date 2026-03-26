@@ -1,21 +1,25 @@
 ---
-import Text from "./Text.astro";
 import { type CollectionEntry } from "astro:content";
+import Text from "../components/Text.astro";
 
 type Props = {
     testimony: CollectionEntry<"testimonials">;
+    index?: number;
     style?: string;
 };
 
-const { testimony, style } = Astro.props;
+const { testimony, index = 0, style } = Astro.props;
 const id = testimony.id;
+
+const bgMap = ["bg-white", "bg-accent-pink/50", "bg-accent-blue/50", "bg-accent-blue/50", "bg-white", "bg-accent-pink/50"];
+const accentBg = bgMap[index] ?? "bg-white";
 const baseClasses =
-    "flex cursor-pointer flex-col rounded-4xl border-3 border-primary bg-accent p-4 shadow-brutal animate-on-scroll";
+    "flex cursor-pointer flex-col rounded-4xl border-3 border-primary p-4 shadow-brutal animate-on-scroll";
 ---
 
-<div class={baseClasses} data-testimonial-trigger={id} {style}>
+<div class:list={[accentBg, baseClasses]} data-testimonial-trigger={id} {style}>
     {/* ----- Testimony Card Header ----- */}
-    <div class="mb-4 flex items-center justify-between gap-4 max-sm:flex-wrap">
+    <div class="mb-4 flex items-center justify-between gap-4 max-md:flex-wrap">
         <div class="text-2xl leading-none">★★★★★</div>
         <div class="flex items-center gap-1 rounded-full border-2 border-primary bg-background px-3 py-1 shadow-brutal">
             <span class="text-xs text-orange-500">❖</span>

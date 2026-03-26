@@ -13,28 +13,45 @@ const services = [
         title: "Digital Patterns",
         description:
             "Download your pattern instantly after purchase. Print at home or at a print shop. Available worldwide.",
-        features: ["Instant PDF download", "A4 & US Letter sizes", "Available worldwide", "Includes instructions"],
+        features: [
+            "Instant PDF download",
+            "A4 & US Letter sizes",
+            "A0 size available on request",
+            "7 sizes included (2XS – 2XL)",
+            "Available worldwide",
+            "Includes instructions",
+        ],
         buttonText: "Shop on Etsy",
-        buttonHref: "/products",
-        bg: "bg-accent",
+        buttonHref: "https://sewmii.etsy.com",
+        target: "_blank",
+        bg: "bg-whiteeeeeeeeeeeeeeeee",
     },
     {
         title: "Printed Patterns",
         description:
             "Get a professionally printed pattern shipped straight to you. Available via Shopee in select regions.",
-        features: ["Professionally printed", "Ready to cut & sew", "PH / SG / MY only", "Via Shopee"],
+        features: [
+            "Professionally printed",
+            "Single large printout",
+            "Ready to cut & sew",
+            "7 sizes included (2XS – 2XL)",
+            "PH / SG / MY only",
+            "Via Shopee",
+        ],
         buttonText: "Shop on Shopee",
-        buttonHref: "https://shopee.com/...",
-        bg: "bg-white",
+        buttonHref: "https://shopee.ph/sewmii",
+        target: "_blank",
+        bg: "bg-accent-pink/50",
     },
     {
         title: "Custom Patterns",
         description:
             "Need something unique? We'll draft a pattern exclusively for you based on your measurements and design.",
-        features: ["Made to your measurements", "Unique exclusive design", "Direct communication"],
+        features: ["Made to your measurements", "Unique exclusive design", "Direct communication", "PDF Download"],
         buttonText: "Get Pricing",
         buttonHref: "/services#pricing",
-        bg: "bg-pink-100",
+        target: "_self",
+        bg: "bg-accent-blue/50",
     },
 ];
 
@@ -68,12 +85,12 @@ const steps = [
     {
         number: "02",
         title: "Consultation",
-        description: "We'll discuss your design, fabric, and any special requirements.",
+        description: "We'll discuss your design, and any special requirements.",
     },
     {
         number: "03",
         title: "Drafting",
-        description: "Your pattern is drafted from scratch based on your exact measurements.",
+        description: "Your pattern is drafted from scratch based on your measurements.",
     },
     {
         number: "04",
@@ -89,7 +106,7 @@ const steps = [
         <section class="relative">
             <Image
                 src={opheliaPattern}
-                alt="Ophelia Corset New Launch Hero"
+                alt="Sewmii sewing pattern pieces laid out on a cutting mat"
                 height={1080}
                 width={1920}
                 class="w-full max-md:h-100 h-[calc(100vh-128px)] object-cover"
@@ -106,15 +123,16 @@ const steps = [
                     <div class="flex max-w-xl flex-col justify-center">
                         <Title
                             as="h3"
-                            class="text-base text-yellow-200 drop-shadow-[1px_1px_0px_rgba(0,0,0,1)] max-md:text-base"
+                            class="text-base text-yellow-200 drop-shadow-[2px_2px_0px_rgba(0,0,0,1)] max-md:text-base"
                         >
                             OUR SERVICES
                         </Title>
-                        <Title as="h2" class="text-white drop-shadow-[1px_1px_0px_rgba(0,0,0,1)] max-md:text-3xl"
+                        <Title as="h2" class="text-white drop-shadow-[2px_2px_0px_rgba(0,0,0,1)] max-md:text-3xl"
                             >Patterns made for everyone</Title
                         >
-                        <Text class="text-white drop-shadow-[1px_1px_0px_rgba(0,0,0,1)]">
-                            Whether you need a digital download, a printed pattern shipped to your door, or something completely unique — we've got you covered.
+                        <Text class="text-white drop-shadow-[2px_2px_0px_rgba(0,0,0,1)]">
+                            Whether you need a digital download, a printed pattern shipped to your door, or something
+                            completely unique — we've got you covered.
                         </Text>
                     </div>
                 </div>
@@ -134,6 +152,7 @@ const steps = [
                             features={service.features}
                             buttonText={service.buttonText}
                             buttonHref={service.buttonHref}
+                            target={service.target}
                             class={service.bg}
                             style={`--delay: ${(index + 1) * 100}ms`}
                         />
@@ -145,7 +164,6 @@ const steps = [
         {/* ----- Custom Pricing ----- */}
         <Section class="animate-on-scroll scroll-mt-24" id="pricing">
             <div class="flex items-start gap-12 max-lg:flex-col">
-
                 {/* ----- Custom Pricing Left Container ----- */}
                 <div class="flex flex-1 flex-col">
                     <Title as="h3" class="text-base text-accent max-md:text-base">CUSTOM PRICING</Title>
@@ -184,16 +202,18 @@ const steps = [
                     class="animate-on-scroll flex w-120 shrink-0 flex-col rounded-4xl bg-primary p-10 max-lg:w-full max-md:p-6"
                     style={`--delay: 100ms`}
                 >
-                    <Title as="h3" class="text-base text-accent max-md:text-base">READY TO ORDER?</Title>
+                    <Title as="h3" class="text-base text-accent-pink max-md:text-base">READY TO ORDER?</Title>
                     <Title as="h3" class="text-white max-md:text-2xl"
                         >Reach out and let's make something together.</Title
                     >
                     <Text class="text-gray-400">Send us a message on Instagram or email us directly.</Text>
                     <div class="mt-2 flex flex-col gap-4">
-                        <ButtonLink href="https://instagram.com/sewmii" variant="ghost">Instagram</ButtonLink>
+                        <ButtonLink href="https://instagram.com/sewmii.studio" target="_blank" variant="ghost"
+                            >Instagram</ButtonLink
+                        >
                         <ButtonLink
                             href="mailto:info.sewmii@gmail.com"
-                            class="border-accent bg-accent text-primary"
+                            class="border-accent bg-accent-pink text-primary"
                             variant="ghost">Email Us</ButtonLink
                         >
                     </div>
@@ -211,11 +231,16 @@ const steps = [
                         <div
                             class:list={[
                                 "animate-on-scroll flex flex-col rounded-4xl border-3 border-primary p-8 shadow-brutal max-md:p-6",
-                                index === 3 ? "bg-accent" : "bg-white",
+                                index === 3 ? "bg-accent-pink" : "bg-white",
                             ]}
                             style={`--delay: ${(index + 1) * 100}ms`}
                         >
-                            <p class:list={["mb-4 text-4xl font-black max-md:text-3xl", index === 3 ? "text-primary" : "text-accent"]}>
+                            <p
+                                class:list={[
+                                    "mb-4 text-4xl font-black max-md:text-3xl",
+                                    index === 3 ? "text-primary" : "text-accent-pink",
+                                ]}
+                            >
                                 {step.number}
                             </p>
                             <Title as="h4" class="text-2xl max-md:text-xl">

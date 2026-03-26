@@ -3,9 +3,12 @@
 @theme {
     --font-sans: var(--font-inter), ui-sans-serif, system-ui;
 
+    /* ----- Option 1 ----- */
     --color-background: #ffffff;
+    --color-background-alternate: #f5f5f5;
     --color-primary: #000000;
-    --color-accent: #a3e635;
+    --color-accent-pink: #f4bcd3;
+    --color-accent-blue: #aad1eb;
 
     --shadow-brutal: 3px 3px 0px 0px rgba(0, 0, 0, 1);
     --shadow-brutal-secondary: 3px 3px 0px 0px rgba(255, 255, 255, 1);
@@ -13,6 +16,18 @@
 
 html {
     scroll-behavior: smooth;
+}
+
+.carousel {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+}
+.carousel-item {
+    scroll-snap-align: start;
+    flex-shrink: 0;
+    width: 100%;
 }
 
 .animate-on-scroll {

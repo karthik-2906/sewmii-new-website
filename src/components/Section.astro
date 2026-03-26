@@ -4,7 +4,7 @@ type Props = {
     id?:string;
 };
 
-const { class: className = "bg-background", id } = Astro.props;
+const { class: className, id } = Astro.props;
 ---
 
 <section class={className} {id}>

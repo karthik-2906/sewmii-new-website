@@ -10,12 +10,12 @@ type Props = {
 
 const { class: className = "", href = "/", target = "_self", variant = "default" } = Astro.props;
 
-const baseClasses =
-    "flex w-max rounded-4xl border-3 px-4 py-2 text-lg font-semibold text-nowrap transition-all select-none";
+const baseClasses = "flex w-max  border-3 px-4 py-2 text-lg font-semibold text-nowrap transition-all select-none";
 
 const variants = {
-    default: "border-black bg-accent shadow-brutal hover:translate-x-0.75 hover:translate-y-0.75 hover:shadow-none",
-    ghost: "w-full justify-center border-white text-white hover:opacity-75",
+    default:
+        "rounded-4xl border-black bg-accent-pink shadow-brutal hover:translate-x-0.75 hover:translate-y-0.75 hover:shadow-none",
+    ghost: "w-full justify-center items-center gap-2 rounded-xl border-white text-white hover:opacity-75",
 };
 ---
 

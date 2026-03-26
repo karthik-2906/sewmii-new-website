@@ -7,13 +7,22 @@ const productsCollection = defineCollection({
     schema: ({ image }) =>
         z.object({
             slug: z.string(),
+            featured: z.boolean(),
+            label: z.string(),
             title: z.string(),
-            price: z.number(),
             shortDescription: z.string(),
             description: z.string(),
+            price: z.number(),
+            etsyLink: z.string(),
+            tutorialLink: z.string(),
             image: image(),
             imageHover: image(),
-            imageCarousel: z.array(z.string())
+            imageCarousel: z.array(
+                z.object({
+                    src: image(),
+                    alt: z.string(),
+                }),
+            ),
         }),
 });
 

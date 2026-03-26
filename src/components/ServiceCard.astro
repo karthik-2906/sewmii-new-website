@@ -10,16 +10,23 @@ type Props = {
     features: string[];
     buttonText: string;
     buttonHref: string;
+    target: string;
     class?: string;
     style: string;
 };
 
-const { title, description, features, buttonText, buttonHref, class: className, style } = Astro.props;
+const { title, description, features, buttonText, buttonHref, target, class: className, style } = Astro.props;
 ---
 
-<div class={twMerge("animate-on-scroll flex flex-col rounded-4xl border-3 border-primary p-8 shadow-brutal max-md:p-6", className)} {style}>
+<div
+    class={twMerge(
+        "animate-on-scroll flex flex-col rounded-4xl border-3 border-primary p-8 shadow-brutal max-md:p-6",
+        className,
+    )}
+    {style}
+>
     <Title as="h3" class="text-3xl max-md:text-2xl">{title}</Title>
     <Text class="mb-8">{description}</Text>
     <List items={features} class="mb-8" />
-    <ButtonLink href={buttonHref} class="mt-auto bg-white">{buttonText}</ButtonLink>
+    <ButtonLink href={buttonHref} {target} class="mt-auto bg-white">{buttonText}</ButtonLink>
 </div>

@@ -1,0 +1,117 @@
+---
+import { Image } from "astro:assets";
+
+type Props = {
+    images: { src: ImageMetadata; alt: string }[];
+};
+
+const { images } = Astro.props;
+---
+
+<div class="flex gap-4 max-md:flex-col">
+    {/* ----- Carousel Thumbnails ----- */}
+    <div
+        class="flex flex-col gap-3 overflow-y-auto max-md:flex-row max-md:overflow-x-auto max-md:order-2"
+        style="scrollbar-width: none;"
+    >
+        {
+            images.map((image, index) => (
+                <button
+                    class="thumbnail h-20 w-20 shrink-0 cursor-pointer overflow-hidden rounded-2xl border-3 border-primary opacity-50 transition-opacity"
+                    data-index={index}
+                >
+                    <Image
+                        src={image.src}
+                        alt={`${image.alt} thumbnail ${index + 1}`}
+                        width={80}
+                        height={80}
+                        class="w-full h-full object-cover"
+                        draggable="false"
+                    />
+                </button>
+            ))
+        }
+    </div>
+
+    {/* ----- Main Carousel ----- */}
+    <div class="relative flex-1 max-md:order-1">
+        <div class="carousel flex overflow-x-auto rounded-4xl border-3 border-primary" style="scrollbar-width: none;">
+            {
+                images.map((image) => (
+                    <div class="carousel-item w-full shrink-0">
+                        <Image
+                            src={image.src}
+                            alt={image.alt}
+                            width={800}
+                            height={800}
+                            class="aspect-square w-full object-cover"
+                            draggable="false"
+                        />
+                    </div>
+                ))
+            }
+        </div>
+
+        {/* ----- Carousel Buttons ----- */}
+        <div class="absolute top-1/2 left-4 -translate-y-1/2">
+            <button
+                class="prev flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border-3 border-primary bg-white pr-0.5 pb-0.5 text-3xl shadow-brutal transition-all hover:translate-x-0.75 hover:translate-y-0.75 hover:shadow-none max-md:hidden"
+                >‹</button
+            >
+        </div>
+        <div class="absolute top-1/2 right-4 -translate-y-1/2">
+            <button
+                class="next flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border-3 border-primary bg-white pr-0.5 pb-0.5 text-3xl shadow-brutal transition-all hover:translate-x-0.75 hover:translate-y-0.75 hover:shadow-none max-md:hidden"
+                >›</button
+            >
+        </div>
+    </div>
+</div>
+
+<script>
+    const carousel = document.querySelector(".carousel") as HTMLElement;
+    const thumbnails = document.querySelectorAll<HTMLElement>(".thumbnail");
+    const items = document.querySelectorAll<HTMLElement>(".carousel-item");
+    const prev = document.querySelector(".prev") as HTMLElement;
+    const next = document.querySelector(".next") as HTMLElement;
+
+    let current = 0;
+
+    const updateButtons = () => {
+        prev.style.opacity = current === 0 ? "0.3" : "1";
+        prev.style.pointerEvents = current === 0 ? "none" : "auto";
+        next.style.opacity = current === items.length - 1 ? "0.3" : "1";
+        next.style.pointerEvents = current === items.length - 1 ? "none" : "auto";
+    };
+
+    const goTo = (index: number) => {
+        current = index;
+        carousel.scrollTo({ left: current * carousel.offsetWidth, behavior: "smooth" });
+        updateButtons();
+    };
+
+    prev.addEventListener("click", () => goTo(Math.max(0, current - 1)));
+    next.addEventListener("click", () => goTo(Math.min(items.length - 1, current + 1)));
+
+    thumbnails.forEach((thumb) => {
+        thumb.addEventListener("click", () => goTo(Number(thumb.dataset.index)));
+    });
+
+    const observer = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    current = Array.from(items).indexOf(entry.target as HTMLElement);
+                    thumbnails.forEach((t) => t.classList.replace("opacity-100", "opacity-50"));
+                    thumbnails[current].classList.replace("opacity-50", "opacity-100");
+                    updateButtons();
+                }
+            });
+        },
+        { root: carousel, threshold: 0.5 },
+    );
+
+    items.forEach((item) => observer.observe(item));
+
+    updateButtons();
+</script>

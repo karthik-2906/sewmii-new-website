@@ -3,7 +3,6 @@ import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 import opheliaBanner from "../content/products/images/ophelia-corset/ophelia-corset-banner.png";
 import opheliaPattern from "../content/products/images/ophelia-corset/ophelia-corset-pattern.jpg";
-import promoImg from "../content/products/images/ophelia-corset/ophelia-corset-front.jpg";
 import Layout from "../layouts/Layout.astro";
 import Section from "../components/Section.astro";
 import Title from "../components/Title.astro";
@@ -15,6 +14,8 @@ import TestimonialsList from "../components/TestimonialsList.astro";
 
 const products = await getCollection("products");
 const testimonials = await getCollection("testimonials");
+
+const featuredProducts = products.filter((p) => p.data.featured === true);
 ---
 
 <Layout title="Homepage">
@@ -40,38 +41,40 @@ const testimonials = await getCollection("testimonials");
                     <div class="flex max-w-xl flex-col justify-center">
                         <Title
                             as="h3"
-                            class="text-base text-yellow-200 drop-shadow-[1px_1px_0px_rgba(0,0,0,1)] max-md:text-base"
+                            class="text-base text-yellow-200 drop-shadow-[2px_2px_0px_rgba(0,0,0,1)] max-md:text-base"
                         >
                             NEW LAUNCH
                         </Title>
-                        <Title as="h2" class="text-white drop-shadow-[1px_1px_0px_rgba(0,0,0,1)] max-md:text-3xl"
+                        <Title as="h2" class="text-white drop-shadow-[2px_2px_0px_rgba(0,0,0,1)] max-md:text-3xl"
                             >Ophelia Corset</Title
                         >
-                        <Text class="text-white drop-shadow-[1px_1px_0px_rgba(0,0,0,1)]">
+                        <Text class="text-white drop-shadow-[2px_2px_0px_rgba(0,0,0,1)]">
                             A timeless sewing pattern featuring a beautifully sculpted silhouette and elegant cinched
                             waist. Designed for enduring style with a touch of drama.
                         </Text>
-                        <ButtonLink class="mt-4">View Item</ButtonLink>
+                        <ButtonLink href="/products/ophelia-corset" class="mt-4">View Item</ButtonLink>
                     </div>
                 </div>
             </div>
         </section>
 
         {/* ----- Intro ----- */}
-        <Section class="bg-purple-50">
+        <Section>
             <div class="flex gap-16 max-lg:flex-col max-lg:gap-8">
                 <div class="flex flex-col justify-center animate-on-scroll">
-                    <Title as="h1">Sewmii Pattern Studio</Title>
+                    <Title as="h1" class="max-w-100 leading-12 max-md:leading-10"
+                        >Beginner-Friendly Digital Sewing Patterns</Title
+                    >
                     <Text class="mb-0 max-md:mb-0">
-                        Sewmii Pattern Studio – Love sewing but not patternmaking? Our beginner-friendly digital and
-                        printed sewing patterns make it easy to create beautiful clothing at home or for your garment
-                        business. Designed by a pattern maker from the Philippines, each pattern is ready to sew, easy
-                        to follow, and perfect for DIY fashion.
+                        Love sewing but not patternmaking? Sewmii offers beginner-friendly digital and printed sewing
+                        patterns designed to make garment-making at home simple and enjoyable. Designed by a pattern
+                        maker from the Philippines, each pattern is ready to sew, easy to follow, and perfect for DIY
+                        fashion.
                     </Text>
                 </div>
                 <Image
                     src={opheliaPattern}
-                    alt="Temp alt"
+                    alt="Sewmii sewing pattern pieces laid out on a cutting mat"
                     height={500}
                     width={500}
                     class="aspect-video object-cover rounded-4xl border-3 border-black shadow-brutal animate-on-scroll"
@@ -81,22 +84,22 @@ const testimonials = await getCollection("testimonials");
         </Section>
 
         {/* ----- Featured Products ----- */}
-        <Section class="bg-blue-50 animate-on-scroll">
+        <Section class="bg-background-alternate animate-on-scroll">
             <div
                 class="mb-12 flex items-center justify-between max-sm:mb-8 max-sm:flex-col max-sm:items-start max-sm:gap-2"
             >
                 <Title as="h2" class="mb-0"> Featured Products </Title>
-                <ButtonLink class="mb-0">View All</ButtonLink>
+                <ButtonLink href="/products" class="mb-0">View All</ButtonLink>
             </div>
-            <ProductsList products={products} />
+            <ProductsList products={featuredProducts} />
         </Section>
 
         {/* ----- Services ----- */}
-        <Section class="bg-pink-50">
+        <Section>
             <div class="flex gap-16 max-lg:flex-col max-lg:gap-8">
                 <Image
-                    src={promoImg}
-                    alt="Temp alt"
+                    src={opheliaPattern}
+                    alt="Sewmii sewing pattern pieces laid out on a cutting mat"
                     height={500}
                     width={500}
                     class="aspect-square self-center rounded-4xl border-3 border-black shadow-brutal animate-on-scroll"
@@ -104,7 +107,7 @@ const testimonials = await getCollection("testimonials");
                 <div class="flex flex-col justify-center animate-on-scroll" style="--delay: 100ms;">
                     <Title as="h2">Our Services</Title>
                     <Text class="mb-6">
-                        We offer a wide array of services to help bring your creative ideas to life.
+                        From digital downloads to custom designs, we have a pattern for every project.
                     </Text>
                     <List
                         items={["Digital sewing patterns", "Physical sewing patterns ❖", "Custom exclusive patterns"]}
@@ -112,15 +115,15 @@ const testimonials = await getCollection("testimonials");
                     <Text
                         class="text-xs leading-tight font-bold tracking-widest text-gray-500 uppercase max-md:text-xs"
                     >
-                        ❖ Physical patterns: PH / SG / MY via Shopee only.
+                        ❖ Physical patterns: Philippines, Singapore & Malaysia — via Shopee only.
                     </Text>
-                    <ButtonLink class="mt-4">View Services</ButtonLink>
+                    <ButtonLink href="/services" class="mt-4">View Services</ButtonLink>
                 </div>
             </div>
         </Section>
 
         {/* ----- Stats ----- */}
-        <Section class="bg-green-50">
+        <Section class="bg-background-alternate">
             <div class="grid grid-cols-3 divide-x-4 text-center max-md:grid-cols-1 max-md:divide-x-0 max-md:divide-y-4">
                 <div class="px-12 py-8 md:py-0 animate-on-scroll" style="--delay: 100ms;">
                     <Title as="h3" class="max-md:text-4xl">10</Title>
@@ -134,7 +137,7 @@ const testimonials = await getCollection("testimonials");
                 </div>
                 <div class="px-12 py-8 md:py-0 animate-on-scroll" style="--delay: 200ms;">
                     <Text class="text-xl content-center h-12 max-md:text-xl max-mg:h-unset">⭐⭐⭐⭐⭐</Text>
-                    <Title as="h4" class="text-2xl font-medium max-md:text-xl">Rated 5 / 5</Title>
+                    <Title as="h4" class="text-2xl font-medium max-md:text-xl">Rated 4.9 / 5</Title>
                     <Text class="mb-0">Across Etsy & Shopee</Text>
                 </div>
             </div>

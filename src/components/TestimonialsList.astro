@@ -14,8 +14,8 @@ const { testimonials } = Astro.props;
     {
         testimonials.map((testimony, index) => (
             <>
-                <TestimonialCard testimony={testimony} style={`--delay: ${((index % 3) + 1) * 100}ms`} />
-                <TestimonialModal testimony={testimony} />
+                <TestimonialCard {testimony} {index} style={`--delay: ${((index % 3) + 1) * 100}ms`} />
+                <TestimonialModal {testimony} {index} />
             </>
         ))
     }

@@ -10,7 +10,7 @@ type Props = {
 const { product, style } = Astro.props;
 
 const baseClasses =
-    "flex flex-col overflow-hidden rounded-4xl border-3 border-primary bg-accent shadow-brutal animate-on-scroll";
+    "animate-on-scroll flex flex-col overflow-hidden rounded-4xl border-3 border-primary bg-white shadow-brutal";
 ---
 
 <a href={`/products/${product.data.slug}`} class={baseClasses} {style}>
@@ -20,7 +20,7 @@ const baseClasses =
             src={product.data.image}
             width={600}
             height={600}
-            alt={product.data.title}
+            alt={`${product.data.title} illustration`}
             class="absolute inset-0 object-cover"
         />
         {
@@ -29,7 +29,7 @@ const baseClasses =
                     src={product.data.imageHover}
                     width={600}
                     height={600}
-                    alt={`${product.data.title} alternate view`}
+                    alt={`${product.data.title} worn on a person`}
                     class="absolute inset-0 object-cover opacity-0 transition-opacity group-hover:opacity-100"
                 />
             )

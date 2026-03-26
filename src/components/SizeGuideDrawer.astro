@@ -1,0 +1,150 @@
+---
+import { Image } from "astro:assets";
+import Title from "./Title.astro";
+import Text from "./Text.astro";
+
+type Props = {
+    inchesImage: ImageMetadata;
+    cmImage: ImageMetadata;
+};
+
+const { inchesImage, cmImage } = Astro.props;
+---
+
+<div id="size-guide-wrapper">
+    {/* ----- Size Guide Trigger ----- */}
+    <button
+        id="size-guide-trigger"
+        class="fixed right-0 bottom-1/2 z-55 translate-y-1/2 cursor-pointer rounded-l-xl border-3 border-r-0 border-primary bg-primary px-2 py-4 text-xs font-black tracking-widest text-white transition-all max-md:z-40 max-md:right-6 max-md:bottom-6 max-md:flex max-md:h-14 max-md:w-14 max-md:translate-x-0 max-md:translate-y-0 max-md:items-center max-md:justify-center max-md:rounded-full max-md:border-3 max-md:border-white max-md:shadow-lg"
+    >
+        {/* ----- Desktop ----- */}
+        <Title
+            id="trigger-label-desktop"
+            as="h3"
+            class="mb-0 text-base font-semibold tracking-normal max-md:mb-0 rotate-180 [writing-mode:vertical-rl] max-md:hidden"
+            >SIZE GUIDE</Title
+        >
+
+        {/* ----- Mobile ----- */}
+        <svg
+            id="trigger-icon-mobile"
+            class="hidden h-6 w-6 max-md:block"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+        >
+            <path d="M3 7h18M3 7a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2M7 7V5m4 2V4m4 2V5m4 2v2"
+            ></path>
+        </svg>
+    </button>
+
+    {/* ----- Overlay ----- */}
+    <div
+        id="size-guide-overlay"
+        class="pointer-events-none fixed inset-0 z-55 bg-black/40 opacity-0 transition-opacity duration-300"
+    >
+    </div>
+
+    {/* ----- Size Guide Drawer ----- */}
+    <div
+        id="size-guide-drawer"
+        class="fixed top-0 right-0 z-60 flex h-full w-xl flex-col border-l-3 border-primary bg-white transition-transform duration-300 max-md:top-0 max-md:right-0 max-md:left-0 max-md:h-auto max-md:max-h-[85dvh] max-md:w-full max-md:rounded-b-3xl max-md:border-b-3 max-md:border-l-0"
+        style="transform: translateX(100%);"
+    >
+        {/* ----- Drawer Header ----- */}
+        <div class="flex items-center justify-between border-b-3 border-primary p-6">
+            <Title as="h3" class="mb-0 text-xl font-black max-md:mb-0 max-md:text-xl">SIZE GUIDE</Title>
+            <button
+                id="size-guide-close"
+                class="relative flex h-8 w-8 cursor-pointer items-center justify-center rounded-md border-3 border-black bg-accent-pink shadow-brutal transition-all hover:translate-x-0.75 hover:translate-y-0.75 hover:shadow-none"
+            >
+                <span class="absolute h-0.75 w-4 rotate-45 bg-black"></span>
+                <span class="absolute h-0.75 w-4 -rotate-45 bg-black"></span>
+            </button>
+        </div>
+
+        {/* ----- Drawer Tabs ----- */}
+        <div class="flex border-b-3 border-primary">
+            <button
+                class="tab flex-1 cursor-pointer border-r-3 border-primary bg-primary py-3 text-sm font-black tracking-widest text-white transition-colors"
+                data-tab="inches">IN</button
+            >
+            <button
+                class="tab flex-1 cursor-pointer py-3 text-sm font-black tracking-widest transition-colors"
+                data-tab="cm">CM</button
+            >
+        </div>
+
+        {/* ----- Drawer Content ----- */}
+        <div class="flex-1 overflow-y-auto p-6">
+            <div id="tab-inches">
+                <Image
+                    src={inchesImage}
+                    alt="Size guide in inches"
+                    class="w-full rounded-2xl border-3 border-primary"
+                />
+            </div>
+            <div id="tab-cm" class="hidden">
+                <Image src={cmImage} alt="Size guide in cm" class="w-full rounded-2xl border-3 border-primary" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const wrapper = document.getElementById("size-guide-wrapper") as HTMLElement;
+    const trigger = document.getElementById("size-guide-trigger") as HTMLElement;
+    const close = document.getElementById("size-guide-close") as HTMLElement;
+    const overlay = document.getElementById("size-guide-overlay") as HTMLElement;
+    const drawer = document.getElementById("size-guide-drawer") as HTMLElement;
+    const tabs = document.querySelectorAll<HTMLElement>(".tab");
+
+    const isMobile = () => window.innerWidth < 768;
+
+    const openDrawer = () => {
+        wrapper.classList.add("drawer-open");
+        overlay.classList.remove("opacity-0", "pointer-events-none");
+        overlay.classList.add("opacity-100");
+        drawer.style.transform = isMobile() ? "translateY(0)" : "translateX(0)";
+        document.body.classList.add("overflow-hidden");
+    };
+
+    const closeDrawer = () => {
+        wrapper.classList.remove("drawer-open");
+        overlay.classList.add("opacity-0", "pointer-events-none");
+        overlay.classList.remove("opacity-100");
+        drawer.style.transform = isMobile() ? "translateY(-100%)" : "translateX(100%)";
+        document.body.classList.remove("overflow-hidden");
+    };
+
+    const initDrawer = () => {
+        if (!wrapper.classList.contains("drawer-open")) {
+            drawer.style.transform = isMobile() ? "translateY(-100%)" : "translateX(100%)";
+        }
+    };
+
+    initDrawer();
+    window.addEventListener("resize", () => {
+        if (!wrapper.classList.contains("drawer-open")) initDrawer();
+    });
+
+    trigger.addEventListener("click", () => {
+        wrapper.classList.contains("drawer-open") ? closeDrawer() : openDrawer();
+    });
+
+    close.addEventListener("click", closeDrawer);
+    overlay.addEventListener("click", closeDrawer);
+
+    tabs.forEach((tab) => {
+        tab.addEventListener("click", () => {
+            tabs.forEach((t) => t.classList.remove("bg-primary", "text-white"));
+            tab.classList.add("bg-primary", "text-white");
+            const target = tab.dataset.tab;
+            document.getElementById("tab-inches")!.classList.toggle("hidden", target !== "inches");
+            document.getElementById("tab-cm")!.classList.toggle("hidden", target !== "cm");
+        });
+    });
+</script>
