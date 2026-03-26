@@ -30,7 +30,7 @@ const otherProducts = products.filter((p) => p.data.slug !== product.data.slug);
 <Layout title={product.data.title}>
     <main>
         {/* ----- Product Listing ----- */}
-        <Section>
+        <Section class="bg-background-alternate">
             <div class="flex gap-16 max-lg:flex-col max-lg:gap-8">
                 {/* ----- Product Carousel ----- */}
                 <div class="animate-on-scroll flex-3">
@@ -39,7 +39,9 @@ const otherProducts = products.filter((p) => p.data.slug !== product.data.slug);
 
                 {/* ----- Product Info ----- */}
                 <div class="animate-on-scroll flex flex-2 flex-col" style="--delay: 150ms;">
-                    <Title as="h3" class="text-base text-accent-pink uppercase max-md:text-base">{product.data.label}</Title>
+                    <Title as="h3" class="text-base bg-accent-pink border-3 w-fit px-4 py-2 rounded-4xl text-primary uppercase max-md:text-base"
+                        >{product.data.label}</Title
+                    >
                     <Title as="h1">{product.data.title}</Title>
                     <Text class="mb-8 max-md:mb-6">{product.data.description}</Text>
 
@@ -51,7 +53,7 @@ const otherProducts = products.filter((p) => p.data.slug !== product.data.slug);
                         <div class="flex flex-wrap gap-2">
                             {
                                 ["2XS", "XS", "S", "M", "L", "XL", "2XL"].map((size) => (
-                                    <span class="rounded-full border-3 border-primary px-4 py-1 text-sm font-bold">
+                                    <span class="bg-white rounded-full border-3 border-primary px-4 py-1 text-sm font-bold">
                                         {size}
                                     </span>
                                 ))
@@ -65,9 +67,15 @@ const otherProducts = products.filter((p) => p.data.slug !== product.data.slug);
                             AVAILABLE PRINT SIZES
                         </Text>
                         <div class="flex flex-wrap gap-2">
-                            <span class="rounded-full border-3 border-primary px-4 py-1 text-sm font-bold">A4</span>
-                            <span class="rounded-full border-3 border-primary px-4 py-1 text-sm font-bold">Letter</span>
-                            <span class="rounded-full border-3 border-primary px-4 py-1 text-sm font-bold">A0</span>
+                            <span class="rounded-full bg-white border-3 border-primary px-4 py-1 text-sm font-bold"
+                                >A4</span
+                            >
+                            <span class="rounded-full bg-white border-3 border-primary px-4 py-1 text-sm font-bold"
+                                >Letter</span
+                            >
+                            <span class="rounded-full bg-white border-3 border-primary px-4 py-1 text-sm font-bold"
+                                >A0</span
+                            >
                         </div>
                         <Text class="mt-2 text-sm font-bold text-gray-500">*A0 Available on request</Text>
                     </div>
@@ -108,7 +116,7 @@ const otherProducts = products.filter((p) => p.data.slug !== product.data.slug);
         </Section>
 
         {/* ----- Other Products ----- */}
-        <Section class="bg-background-alternate animate-on-scroll">
+        <Section class="animate-on-scroll">
             <Title as="h2">Other Products</Title>
             <Text class="mb-12 max-md:mb-8">Three ways to get your hands on a sewmii pattern</Text>
             <ProductsList products={otherProducts} />

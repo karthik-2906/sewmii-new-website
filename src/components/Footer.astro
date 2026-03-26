@@ -1,7 +1,7 @@
 ---
 import { twMerge } from "tailwind-merge";
 import { Image } from "astro:assets";
-import logo from "../content/logos/sewmii-logo-rectangle.png";
+import logo from "../content/logos/sewmii-logo-text-light.png";
 import Title from "./Title.astro";
 import Text from "./Text.astro";
 
@@ -36,11 +36,11 @@ const footerAnchorClass =
             {/* ----- Footer Left Column ----- */}
             <div class="flex flex-col gap-6">
                 <a href="/" class="">
-                    <Image src={logo} alt="sewmii logo" class="h-20 w-auto max-lg:h-16 max-md:h-12" />
+                    <Image src={logo} alt="sewmii logo" class="h-12 w-auto" />
                 </a>
                 <div>
                     <Text class="mb-6 max-w-sm text-base max-sm:mb-4"
-                        >Precision-engineered sewing patterns for the modern maker. Designed in the Philippines.</Text
+                        >Beginner-friendly digital and printed sewing patterns. Designed in the Philippines.</Text
                     >
 
                     <Title as="h4" class={footerH4Class}>CONTACT US</Title>

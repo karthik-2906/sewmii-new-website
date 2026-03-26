@@ -24,7 +24,7 @@ const services = [
         buttonText: "Shop on Etsy",
         buttonHref: "https://sewmii.etsy.com",
         target: "_blank",
-        bg: "bg-whiteeeeeeeeeeeeeeeee",
+        bg: "bg-white",
     },
     {
         title: "Printed Patterns",
@@ -103,7 +103,7 @@ const steps = [
 <Layout title="Services Page">
     <main>
         {/* ----- Banner ----- */}
-        <section class="relative">
+        <!-- <section class="relative">
             <Image
                 src={opheliaPattern}
                 alt="Sewmii sewing pattern pieces laid out on a cutting mat"
@@ -137,10 +137,10 @@ const steps = [
                     </div>
                 </div>
             </div>
-        </section>
+        </section> -->
 
         {/* ----- What we Offer ----- */}
-        <Section class="animate-on-scroll">
+        <Section class="bg-background-alternate animate-on-scroll">
             <Title as="h2">What we Offer</Title>
             <Text class="mb-12 max-md:mb-8">Three ways to get your hands on a sewmii pattern</Text>
             <div class="grid grid-cols-3 gap-8 max-lg:grid-cols-1">
@@ -176,11 +176,11 @@ const steps = [
                         {
                             customPatterns.map((pattern, index) => (
                                 <div
-                                    class="animate-on-scroll flex items-center justify-between rounded-4xl border-3 border-primary p-6 shadow-brutal max-sm:gap-2"
+                                    class="bg-white animate-on-scroll flex items-center justify-between rounded-4xl border-3 border-primary p-6 shadow-brutal max-sm:gap-2"
                                     style={`--delay: ${(index + 1) * 100}ms`}
                                 >
                                     <div class="max-sm:flex-4">
-                                        <Title as="h4" class="tmb-2 text-2xl max-md:mb-2 max-md:text-xl">
+                                        <Title as="h4" class="mb-2 text-2xl max-md:mb-2 max-md:text-xl">
                                             {pattern.title}
                                         </Title>
                                         <Text class="mb-0">{pattern.description}</Text>
@@ -222,7 +222,7 @@ const steps = [
         </Section>
 
         {/* ----- How it Works ----- */}
-        <Section class="animate-on-scroll">
+        <Section class="bg-background-alternate animate-on-scroll">
             <Title as="h2">How it Works</Title>
             <Text class="mb-12 max-md:mb-8">The custom pattern process, step by step.</Text>
             <div class="grid grid-cols-4 gap-8 max-lg:grid-cols-2 max-sm:grid-cols-1">
