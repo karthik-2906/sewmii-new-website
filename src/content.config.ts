@@ -12,6 +12,7 @@ const productsCollection = defineCollection({
             title: z.string(),
             shortDescription: z.string(),
             description: z.string(),
+            difficulty: z.string(),
             price: z.number(),
             etsyLink: z.string(),
             tutorialLink: z.string(),
