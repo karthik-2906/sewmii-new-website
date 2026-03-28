@@ -1,6 +1,6 @@
 ---
-import { Image } from "astro:assets";
-import opheliaPattern from "../content/products/images/ophelia-corset/ophelia-corset-pattern.jpg";
+// import { Image } from "astro:assets";
+// import opheliaPattern from "../content/products/images/ophelia-corset/ophelia-corset-pattern.jpg";
 import Layout from "../layouts/Layout.astro";
 import Title from "../components/Title.astro";
 import Text from "../components/Text.astro";
@@ -98,9 +98,79 @@ const steps = [
         description: "Your finished pattern is delivered digitally, ready to print and sew.",
     },
 ];
+
+const siteUrl = "https://www.sewmii.com";
+
+const servicesSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: "sewmii Sewing Pattern Services",
+    provider: {
+        "@type": "Organization",
+        name: "sewmii",
+        url: siteUrl,
+    },
+    hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: "Sewing Pattern Services",
+        itemListElement: [
+            {
+                "@type": "Offer",
+                itemOffered: {
+                    "@type": "Service",
+                    name: "Digital Patterns",
+                    description:
+                        "Download your pattern instantly after purchase. Print at home or at a print shop. Available worldwide.",
+                    url: "https://sewmii.etsy.com",
+                },
+            },
+            {
+                "@type": "Offer",
+                itemOffered: {
+                    "@type": "Service",
+                    name: "Printed Patterns",
+                    description:
+                        "Get a professionally printed pattern shipped straight to you. Available via Shopee in select regions.",
+                    url: "https://shopee.ph/sewmii",
+                },
+            },
+            {
+                "@type": "Offer",
+                itemOffered: {
+                    "@type": "Service",
+                    name: "Custom Patterns",
+                    description: "We'll draft a pattern exclusively for you based on your measurements and design.",
+                },
+            },
+        ],
+    },
+};
+
+const customPricingSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: "Custom Sewing Patterns",
+    provider: {
+        "@type": "Organization",
+        name: "sewmii",
+        url: siteUrl,
+    },
+    offers: customPatterns.map((pattern) => ({
+        "@type": "Offer",
+        name: pattern.title,
+        description: pattern.description,
+        price: pattern.price,
+        priceCurrency: "USD",
+    })),
+};
 ---
 
-<Layout title="Services Page">
+<Layout
+    title="Sewing Pattern Services"
+    description="Choose from digital downloads, printed patterns shipped to your door, or a fully custom pattern drafted to your measurements. Available worldwide via Etsy and Shopee."
+>
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(servicesSchema)} slot="head" />
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(customPricingSchema)} slot="head" />
     <main>
         {/* ----- Banner ----- */}
         <!-- <section class="relative">
@@ -212,7 +282,7 @@ const steps = [
                             >Instagram</ButtonLink
                         >
                         <ButtonLink
-                            href="mailto:info.sewmii@gmail.com"
+                            href="mailto:info.sewmii@gmail.com?subject=Custom Pattern Order Inquiry"
                             class="border-accent bg-accent-pink text-primary"
                             variant="ghost">Email Us</ButtonLink
                         >

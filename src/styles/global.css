@@ -21,6 +21,16 @@ body {
     scrollbar-gutter: stable;
 }
 
+#size-guide-drawer {
+    transform: translateX(100%);
+}
+
+@media (max-width: 767px) {
+    #size-guide-drawer {
+        transform: translateY(-100%);
+    }
+}
+
 .carousel {
     display: flex;
     overflow-x: auto;

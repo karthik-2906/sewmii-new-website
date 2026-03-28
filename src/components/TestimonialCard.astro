@@ -11,7 +11,14 @@ type Props = {
 const { testimony, index = 0, style } = Astro.props;
 const id = testimony.id;
 
-const bgMap = ["bg-white", "bg-accent-pink/50", "bg-accent-blue/50", "bg-accent-blue/50", "bg-white", "bg-accent-pink/50"];
+const bgMap = [
+    "bg-white",
+    "bg-accent-pink/50",
+    "bg-accent-blue/50",
+    "bg-accent-pink/50",
+    "bg-accent-blue/50",
+    "bg-white",
+];
 const accentBg = bgMap[index] ?? "bg-white";
 const baseClasses =
     "flex cursor-pointer flex-col rounded-4xl border-3 border-primary p-4 shadow-brutal animate-on-scroll";

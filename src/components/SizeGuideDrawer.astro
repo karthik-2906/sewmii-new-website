@@ -15,7 +15,8 @@ const { inchesImage, cmImage } = Astro.props;
     {/* ----- Size Guide Trigger ----- */}
     <button
         id="size-guide-trigger"
-        class="fixed right-0 bottom-1/2 z-55 translate-y-1/2 cursor-pointer rounded-l-xl border-3 border-r-0 border-primary bg-accent-pink px-2 py-4 text-xs font-black tracking-widest transition-all max-md:z-40 max-md:right-6 max-md:bottom-6 max-md:flex max-md:h-14 max-md:w-14 max-md:translate-x-0 max-md:translate-y-0 max-md:items-center max-md:justify-center max-md:rounded-full max-md:border-3 max-md:shadow-lg"
+        aria-label="Open size guide"
+        class="fixed right-0 bottom-1/2 z-55 translate-y-1/2 cursor-pointer rounded-l-xl border-3 border-r-0 border-primary bg-accent-pink px-2 py-4 text-xs font-black tracking-widest transition-all max-md:z-40 max-md:right-6 max-md:bottom-[calc(100dvh-100svh+1.5rem)] max-md:flex max-md:h-14 max-md:w-14 max-md:translate-x-0 max-md:translate-y-0 max-md:items-center max-md:justify-center max-md:rounded-full max-md:border-3 max-md:shadow-lg"
     >
         {/* ----- Desktop ----- */}
         <Title
@@ -52,13 +53,13 @@ const { inchesImage, cmImage } = Astro.props;
     <div
         id="size-guide-drawer"
         class="fixed top-0 right-0 z-60 flex h-full w-xl flex-col border-l-3 border-primary bg-background transition-transform duration-300 max-md:top-0 max-md:right-0 max-md:left-0 max-md:h-auto max-md:max-h-[85dvh] max-md:w-full max-md:rounded-b-3xl max-md:border-b-3 max-md:border-l-0"
-        style="transform: translateX(100%);"
     >
         {/* ----- Drawer Header ----- */}
         <div class="flex items-center justify-between border-b-3 border-primary p-6">
             <Title as="h3" class="mb-0 text-xl font-black max-md:mb-0 max-md:text-xl">SIZE GUIDE</Title>
             <button
                 id="size-guide-close"
+                aria-label="Close size guide"
                 class="relative flex h-8 w-8 cursor-pointer items-center justify-center rounded-md border-3 border-black bg-accent-pink shadow-brutal transition-all hover:translate-x-0.75 hover:translate-y-0.75 hover:shadow-none"
             >
                 <span class="absolute h-0.75 w-4 rotate-45 bg-black"></span>
@@ -120,15 +121,10 @@ const { inchesImage, cmImage } = Astro.props;
         document.body.classList.remove("overflow-hidden");
     };
 
-    const initDrawer = () => {
-        if (!wrapper.classList.contains("drawer-open")) {
-            drawer.style.transform = isMobile() ? "translateY(-100%)" : "translateX(100%)";
-        }
-    };
-
-    initDrawer();
     window.addEventListener("resize", () => {
-        if (!wrapper.classList.contains("drawer-open")) initDrawer();
+        if (!wrapper.classList.contains("drawer-open")) {
+            drawer.style.transform = "";
+        }
     });
 
     trigger.addEventListener("click", () => {
