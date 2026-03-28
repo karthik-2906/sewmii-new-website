@@ -36,7 +36,6 @@ const { testimonials } = Astro.props;
                 const modal = document.getElementById(`modal-${id}`) as HTMLDialogElement;
 
                 modal?.showModal();
-                document.body.classList.add("overflow-hidden");
                 return;
             }
 
@@ -54,16 +53,6 @@ const { testimonials } = Astro.props;
                 ) as HTMLDialogElement;
 
                 modal?.close();
-                document.body.classList.remove("overflow-hidden");
-            }
-        });
-
-        {
-            /* ----- Logic for closing the modal with ESC key ----- */
-        }
-        document.addEventListener("keydown", (e) => {
-            if (e.key === "Escape") {
-                document.body.classList.remove("overflow-hidden");
             }
         });
     };

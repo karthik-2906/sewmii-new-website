@@ -25,9 +25,37 @@ type Props = {
 
 const { product } = Astro.props;
 const otherProducts = products.filter((p) => p.data.slug !== product.data.slug);
+
+const productSchema = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: product.data.title,
+    description: product.data.description,
+    image: product.data.imageCarousel.map((img) => img.src.src),
+    brand: {
+        "@type": "Brand",
+        name: "sewmii",
+    },
+    offers: {
+        "@type": "Offer",
+        url: product.data.etsyLink,
+        availability: "https://schema.org/InStock",
+        seller: {
+            "@type": "Organization",
+            name: "sewmii",
+        },
+    },
+};
 ---
 
-<Layout title={product.data.title}>
+<Layout
+    title={product.data.title}
+    description={product.data.description}
+    image={product.data.imageCarousel[0].src.src}
+    imageAlt={product.data.imageCarousel[0].alt}
+    type="article"
+>
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(productSchema)} slot="head" />
     <main>
         {/* ----- Product Listing ----- */}
         <Section class="bg-background-alternate">
@@ -39,9 +67,16 @@ const otherProducts = products.filter((p) => p.data.slug !== product.data.slug);
 
                 {/* ----- Product Info ----- */}
                 <div class="animate-on-scroll flex flex-2 flex-col" style="--delay: 150ms;">
-                    <Title as="h3" class="text-base bg-accent-pink border-3 w-fit px-4 py-2 rounded-4xl text-primary uppercase max-md:text-base"
-                        >{product.data.label}</Title
-                    >
+                    <div class="flex gap-2">
+                        <Title
+                            as="h3"
+                            class="text-base bg-accent-pink border-3 w-fit px-4 py-2 rounded-4xl text-primary uppercase max-md:text-base"
+                            >{product.data.label}</Title
+                        >
+                        <Title as="h3" class="text-base border-3 w-fit px-4 py-2 rounded-4xl uppercase max-md:text-base"
+                            >{product.data.difficulty}</Title
+                        >
+                    </div>
                     <Title as="h1">{product.data.title}</Title>
                     <Text class="mb-8 max-md:mb-6">{product.data.description}</Text>
 
@@ -83,7 +118,7 @@ const otherProducts = products.filter((p) => p.data.slug !== product.data.slug);
                     {/* ----- Button Links ----- */}
                     <div class="flex gap-4 max-md:flex-col">
                         <ButtonLink
-                            href={product.data.etsyLink}
+                            href={product.data.tutorialLink}
                             variant="ghost"
                             target="_blank"
                             class="border-black bg-white text-black"

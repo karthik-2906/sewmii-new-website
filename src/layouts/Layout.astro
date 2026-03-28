@@ -1,6 +1,6 @@
 ---
-import { Font } from "astro:assets";
 import "../styles/global.css";
+import { Font } from "astro:assets";
 import sizeChartInches from "../content/products/images/sewmii-size-guide-in.jpg";
 import sizeChartCm from "../content/products/images/sewmii-size-guide-cm.jpg";
 import Header from "../components/Header.astro";
@@ -11,9 +11,54 @@ interface Props {
     title: string;
     description?: string;
     image?: string;
+    imageAlt?: string;
+    canonicalUrl?: string;
+    type?: "website" | "article";
 }
 
-const { title, description = "Default description", image = "/images/temp.jpg" } = Astro.props;
+const {
+    title,
+    description = "Discover sewmii's handcrafted sewing patterns. Find your next project and bring it to life with our detailed patterns, available on Etsy or as custom orders.",
+    image = "/images/de-vil-cropped-bolero-front.jpg",
+    imageAlt = "De Vil Cropped Bolero finished product using sewmii's sewing pattern",
+    canonicalUrl = Astro.url.href,
+    type = "website",
+} = Astro.props;
+
+const siteName = "sewmii";
+const fullTitle = `${title} | ${siteName}`;
+const siteUrl = "https://www.sewmii.com";
+
+const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: siteName,
+    url: siteUrl,
+    logo: {
+        "@type": "ImageObject",
+        url: `${siteUrl}/images/logo-schema.png`,
+        width: 600,
+        height: 243,
+    },
+    sameAs: [
+        "https://sewmii.etsy.com",
+        "https://instagram.com/sewmii.studio",
+        "https://shopee.ph/sewmii",
+        "http://www.youtube.com/@sewmii",
+    ],
+    contactPoint: {
+        "@type": "ContactPoint",
+        email: "info.sewmii@gmail.com",
+        contactType: "customer service",
+    },
+};
+
+const websiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: siteName,
+    url: siteUrl,
+};
 ---
 
 <!doctype html>
@@ -21,13 +66,25 @@ const { title, description = "Default description", image = "/images/temp.jpg" }
     <head>
         <Font cssVariable="--font-inter" preload />
         <meta charset="UTF-8" />
-        <meta name="description" content={description} />
         <meta name="viewport" content="width=device-width" />
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <meta name="description" content={description} />
+        <link rel="canonical" href={canonicalUrl} />
         <link rel="icon" href="/favicon.ico" />
-        <meta name="generator" content={Astro.generator} />
+        <title>{fullTitle}</title>
+
+        <meta property="og:type" content={type} />
+        <meta property="og:site_name" content={siteName} />
+        <meta property="og:title" content={fullTitle} />
+        <meta property="og:description" content={description} />
+        <meta property="og:url" content={canonicalUrl} />
         <meta property="og:image" content={image} />
-        <title>{title}</title>
+        <meta property="og:image:alt" content={imageAlt} />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+
+        <script type="application/ld+json" is:inline set:html={JSON.stringify(organizationSchema)} />
+        <script type="application/ld+json" is:inline set:html={JSON.stringify(websiteSchema)} />
+        <slot name="head" />
     </head>
     <body class="bg-background">
         <Header />

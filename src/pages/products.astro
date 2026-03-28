@@ -10,7 +10,10 @@ import ButtonLink from "../components/ButtonLink.astro";
 const products = await getCollection("products");
 ---
 
-<Layout title="Product Page">
+<Layout
+    title="Sewing Patterns"
+    description="Browse sewmii's collection of beginner-friendly digital and printed sewing patterns. Find your next project and shop on Etsy, Shopee, or request a custom order."
+>
     <main>
         {/* ----- All Products ----- */}
         <Section class="bg-background-alternate animate-on-scroll">

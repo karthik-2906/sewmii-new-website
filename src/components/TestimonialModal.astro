@@ -2,7 +2,6 @@
 import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
 import Text from "./Text.astro";
-import tempImage from "../content/products/images/athena-corset/athena-corset-front.png";
 
 type Props = {
     testimony: CollectionEntry<"testimonials">;
@@ -12,16 +11,20 @@ type Props = {
 const { testimony, index = 0 } = Astro.props;
 const id = testimony.id;
 
-const bgMap = ["bg-white", "bg-accent-pink/50", "bg-accent-blue/50", "bg-accent-blue/50", "bg-white", "bg-accent-pink/50"];
+const bgMap = [
+    "bg-white",
+    "bg-accent-pink/50",
+    "bg-accent-blue/50",
+    "bg-accent-pink/50",
+    "bg-accent-blue/50",
+    "bg-white",
+];
 const accentBg = bgMap[index] ?? "bg-white";
 const baseClasses =
     "relative m-auto flex w-[90vw] max-w-4xl flex-row gap-6 rounded-4xl border-3 border-primary p-6 shadow-brutal max-sm:flex-col max-sm:gap-4";
 ---
 
-<dialog
-    id={`modal-${id}`}
-    class="m-auto overflow-visible rounded-4xl backdrop:bg-primary/50 backdrop:backdrop-blur-sm"
->
+<dialog id={`modal-${id}`} class="m-auto overflow-visible rounded-4xl backdrop:bg-primary/50 backdrop:backdrop-blur-sm">
     {/* ----- Testimonial Modal Close Btn ----- */}
     <button
         class="absolute top-0 right-0 z-50 -mt-2 -mr-2 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full border-3 border-primary bg-white font-black transition-colors hover:bg-primary hover:text-white focus:outline-none"
@@ -30,12 +33,13 @@ const baseClasses =
         ✕
     </button>
 
-    <div class:list={[accentBg,baseClasses]}>
+    {/* ----- Testimonial Modal Card ----- */}
+    <div class:list={[accentBg, baseClasses]}>
         {/* ----- Testimonial Modal Image ----- */}
         <div class="aspect-square flex-1 overflow-hidden rounded-2xl border-3 border-primary">
             <Image
-                src={tempImage}
-                alt={`Review for ${testimony.data.shop}`}
+                src={testimony.data.image}
+                alt={`Review from ${testimony.data.name} for ${testimony.data.shop}`}
                 class="h-full object-cover"
                 draggable="false"
             />
@@ -46,7 +50,7 @@ const baseClasses =
             <div class="mb-4 flex items-center justify-between gap-4 max-sm:flex-wrap">
                 <div class="text-2xl leading-none">★★★★★</div>
                 <div
-                    class="flex items-center gap-1 rounded-full border-2 border-primary bg-background px-3 py-1 shadow-brutal"
+                    class="flex items-center gap-1 rounded-full border-2 border-primary bg-white px-3 py-1 shadow-brutal"
                 >
                     <span class="text-xs text-orange-500">❖</span>
                     <p class="text-[10px] font-black tracking-tight">
@@ -67,8 +71,9 @@ const baseClasses =
                 </span>
                 <a
                     class="rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-background shadow-brutal-secondary transition-all hover:translate-x-0.75 hover:translate-y-0.75 hover:shadow-none"
-                    href="/"
+                    href={testimony.data.productLink}
                     draggable="false"
+                    target={testimony.data.target ? testimony.data.target : '_self'}
                 >
                     View Product
                 </a>
@@ -76,3 +81,46 @@ const baseClasses =
         </div>
     </div>
 </dialog>
+
+{/* ----- Dialog Open/Close Animation ----- */}
+<style>
+    dialog {
+        opacity: 0;
+        transform: scale(0.95);
+        transition:
+            opacity 0.2s ease,
+            transform 0.2s ease,
+            overlay 0.2s ease allow-discrete,
+            display 0.2s ease allow-discrete;
+    }
+
+    dialog[open] {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    @starting-style {
+        dialog[open] {
+            opacity: 0;
+            transform: scale(0.95);
+        }
+    }
+
+    dialog::backdrop {
+        opacity: 0;
+        transition:
+            opacity 0.2s ease,
+            overlay 0.2s ease allow-discrete,
+            display 0.2s ease allow-discrete;
+    }
+
+    dialog[open]::backdrop {
+        opacity: 1;
+    }
+
+    @starting-style {
+        dialog[open]::backdrop {
+            opacity: 0;
+        }
+    }
+</style>

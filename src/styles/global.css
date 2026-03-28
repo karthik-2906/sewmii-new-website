@@ -3,9 +3,8 @@
 @theme {
     --font-sans: var(--font-inter), ui-sans-serif, system-ui;
 
-    /* ----- Option 1 ----- */
     --color-background: #f5f5f5;
-    --color-background-alternate: #F0F0F0;
+    --color-background-alternate: #f0f0f0;
     --color-primary: #000000;
     --color-accent-pink: #f4bcd3;
     --color-accent-blue: #aad1eb;
@@ -16,6 +15,20 @@
 
 html {
     scroll-behavior: smooth;
+}
+
+body {
+    scrollbar-gutter: stable;
+}
+
+#size-guide-drawer {
+    transform: translateX(100%);
+}
+
+@media (max-width: 767px) {
+    #size-guide-drawer {
+        transform: translateY(-100%);
+    }
 }
 
 .carousel {

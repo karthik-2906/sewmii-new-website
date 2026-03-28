@@ -12,6 +12,7 @@ const productsCollection = defineCollection({
             title: z.string(),
             shortDescription: z.string(),
             description: z.string(),
+            difficulty: z.string(),
             price: z.number(),
             etsyLink: z.string(),
             tutorialLink: z.string(),
@@ -27,13 +28,16 @@ const productsCollection = defineCollection({
 });
 
 const testimonialsCollection = defineCollection({
-    loader: file("./src/content/testimonials/testimonials.json"),
-    schema: z.object({
-        id: z.string(),
-        review: z.string(),
-        name: z.string(),
-        shop: z.string(),
-    }),
+    loader: glob({ base: "./src/content/testimonials", pattern: "**/*.mdx" }),
+    schema: ({ image }) =>
+        z.object({
+            review: z.string(),
+            name: z.string(),
+            shop: z.string(),
+            image: image(),
+            productLink: z.string(),
+            target: z.string().optional()
+        }),
 });
 
 export const collections = {
