@@ -13,6 +13,11 @@
     --shadow-brutal-secondary: 3px 3px 0px 0px rgba(255, 255, 255, 1);
 }
 
+::selection {
+  background-color: var(--color-accent-pink);
+  color: black;
+}
+
 html {
     scroll-behavior: smooth;
 }
