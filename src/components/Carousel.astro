@@ -46,6 +46,8 @@ const { images } = Astro.props;
                             height={800}
                             class="aspect-square w-full object-cover bg-accent-blue"
                             draggable="false"
+                            loading="eager"
+                            fetchpriority="high"
                         />
                     </div>
                 ))
