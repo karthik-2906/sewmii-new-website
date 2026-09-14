@@ -1,8 +1,8 @@
 ---
 import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
-import sophieBanner from "../content/products/images/sophie-dress/sophie-dress-banner.jpg";
-import opheliaBanner from "../content/products/images/ophelia-corset/ophelia-corset-banner.png"
+import alexaBanner from "../content/products/images/alexa-dress/alexa-dress-banner-desktop.jpg";
+import alexaBannerMobile from "../content/products/images/alexa-dress/alexa-dress-front-1.jpg";
 import opheliaPattern from "../content/products/images/ophelia-corset/ophelia-corset-pattern.jpg";
 import Layout from "../layouts/Layout.astro";
 import Section from "../components/Section.astro";
@@ -26,18 +26,37 @@ const featuredProducts = products.filter((p) => p.data.featured === true);
     <main>
         {/* ----- Banner ----- */}
         <section class="relative">
-            <Image
-                src={opheliaBanner}
-                alt="Ophelia Corset New Launch Hero"
+            <!-- <Image
+                src={alexaBanner}
+                alt="Alexa Dress New Launch Hero"
                 height={1080}
                 width={1920}
                 class="w-full max-md:h-100 h-[calc(100dvh-128px)] object-cover"
                 loading="eager"
                 fetchpriority="high"
+            /> -->
+            <Image
+                src={alexaBanner}
+                alt="Alexa Dress New Launch Hero"
+                height={1080}
+                width={1920}
+                class="w-full max-md:hidden h-[calc(100dvh-128px)] object-cover"
+                loading="eager"
+                fetchpriority="high"
+            />
+
+            <Image
+                src={alexaBannerMobile}
+                alt="Alexa Dress New Launch Hero"
+                height={1200}
+                width={800}
+                class="hidden max-md:block object-cover"
+                loading="eager"
+                fetchpriority="high"
             />
 
             {/* ----- Overlay ----- */}
-            <div class="absolute inset-0 bg-black/30" aria-hidden="true"></div>
+            <!-- <div class="absolute inset-0 bg-black/30" aria-hidden="true"></div> -->
 
             {/* ----- Banner Text Content ----- */}
             <div class="absolute inset-0 z-10 flex items-center">
@@ -50,12 +69,13 @@ const featuredProducts = products.filter((p) => p.data.featured === true);
                             NEW LAUNCH
                         </Title>
                         <Title as="h2" class="text-white drop-shadow-[2px_2px_0px_rgba(0,0,0,1)] max-md:text-3xl"
-                            >Ophelia Corset</Title
+                            >Alexa Dress</Title
                         >
-                        <Text class="text-white drop-shadow-[2px_2px_0px_rgba(0,0,0,1)]">
-                            A classic sewing pattern with a softly structured silhouette and a cinched waist that enhances natural curves.
+                        <Text class="text-white drop-shadow-[2px_2px_0px_rgba(0,0,0,1)] max-md:hidden">
+                            An elegant dress pattern with a clean, slightly dropped bodice and a voluminous gathered
+                            skirt. An ideal base pattern for a wedding dress.
                         </Text>
-                        <ButtonLink href="/products/ophelia-corset" class="mt-4">View Item</ButtonLink>
+                        <ButtonLink href="/products/alexa-dress" class="mt-4">View Item</ButtonLink>
                     </div>
                 </div>
             </div>
