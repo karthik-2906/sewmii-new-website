@@ -22,41 +22,28 @@ const { testimonials } = Astro.props;
 </div>
 
 <script>
-    const initTestimonials = () => {
-        document.addEventListener("click", (e) => {
-            const target = e.target as HTMLElement;
-            if (!target) return;
+    document.addEventListener("click", (e) => {
+        const target = e.target as HTMLElement;
+        if (!target) return;
 
-            {
-                /* ----- Logic for opening the modal ----- */
-            }
-            const trigger = target.closest("[data-testimonial-trigger]");
-            if (trigger) {
-                const id = trigger.getAttribute("data-testimonial-trigger");
-                const modal = document.getElementById(`modal-${id}`) as HTMLDialogElement;
+        const trigger = target.closest("[data-testimonial-trigger]");
+        if (trigger) {
+            const id = trigger.getAttribute("data-testimonial-trigger");
+            const modal = document.getElementById(`modal-${id}`) as HTMLDialogElement;
+            modal?.showModal();
+            return;
+        }
 
-                modal?.showModal();
-                return;
-            }
+        const closeBtn = target.closest("[data-testimonial-close]");
+        const isBackdrop = target.tagName === "DIALOG";
 
-            {
-                /* ----- Logic for closing the modal ----- */
-            }
-            const closeBtn = target.closest("[data-testimonial-close]");
-            const isBackdrop = target.tagName === "DIALOG";
-
-            if (closeBtn || isBackdrop) {
-                const modal = (
-                    closeBtn
-                        ? document.getElementById(`modal-${closeBtn.getAttribute("data-testimonial-close")}`)
-                        : target
-                ) as HTMLDialogElement;
-
-                modal?.close();
-            }
-        });
-    };
-
-    initTestimonials();
-    document.addEventListener("astro:page-load", initTestimonials);
+        if (closeBtn || isBackdrop) {
+            const modal = (
+                closeBtn
+                    ? document.getElementById(`modal-${closeBtn.getAttribute("data-testimonial-close")}`)
+                    : target
+            ) as HTMLDialogElement;
+            modal?.close();
+        }
+    });
 </script>

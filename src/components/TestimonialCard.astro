@@ -1,6 +1,7 @@
 ---
 import { type CollectionEntry } from "astro:content";
 import Text from "../components/Text.astro";
+import { Image } from "astro:assets";
 
 type Props = {
     testimony: CollectionEntry<"testimonials">;
@@ -21,10 +22,19 @@ const bgMap = [
 ];
 const accentBg = bgMap[index] ?? "bg-white";
 const baseClasses =
-    "flex cursor-pointer flex-col rounded-4xl border-3 border-primary p-4 shadow-brutal animate-on-scroll";
+    "flex flex-col rounded-4xl border-3 border-primary p-4 shadow-brutal animate-on-scroll";
 ---
 
-<div class:list={[accentBg, baseClasses]} data-testimonial-trigger={id} {style}>
+<div class:list={[accentBg, baseClasses]} {style}>
+    <div class="aspect-square overflow-hidden rounded-2xl border-3 border-primary mb-4">
+        <Image
+            src={testimony.data.image}
+            alt={`Review from ${testimony.data.name} for ${testimony.data.shop}`}
+            class="h-full object-cover"
+            draggable="false"
+        />
+    </div>
+
     {/* ----- Testimony Card Header ----- */}
     <div class="mb-4 flex items-center justify-between gap-4 max-md:flex-wrap">
         <div class="text-2xl leading-none">★★★★★</div>
@@ -42,5 +52,15 @@ const baseClasses =
     </Text>
 
     {/* ----- Testimony Card Footer ----- */}
-    <span class="mt-auto text-sm font-semibold">— {testimony.data.name}</span>
+    <div class="mt-auto flex items-center justify-between">
+        <span class="text-sm font-semibold">— {testimony.data.name}</span>
+        <button
+            type="button"
+            data-testimonial-trigger={id}
+            aria-label={`Read full review from ${testimony.data.name}`}
+            class="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border-3 border-primary bg-white pr-0.5 pb-0.5 text-3xl leading-none shadow-brutal transition-all hover:translate-x-0.75 hover:translate-y-0.75 hover:shadow-none"
+        >
+            ›
+        </button>
+    </div>
 </div>

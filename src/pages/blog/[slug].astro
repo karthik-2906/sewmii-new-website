@@ -1,0 +1,147 @@
+---
+import { getCollection, render } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import Section from "../../components/Section.astro";
+import Title from "../../components/Title.astro";
+import BlogsList from "../../components/BlogsList.astro";
+import { Image } from "astro:assets";
+
+const blogs = await getCollection("blogs");
+
+export const getStaticPaths = async () => {
+    const blogs = await getCollection("blogs");
+    return blogs.map((blog) => ({
+        params: { slug: blog.id },
+        props: { blog },
+    }));
+};
+
+const { blog } = Astro.props;
+const { Content } = await render(blog);
+// const otherBlogs = blogs.filter((b) => b.id !== blog.id);
+
+const formattedDate = blog.data.pubDate.toLocaleDateString("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+});
+
+const siteUrl = Astro.site ?? Astro.url.origin;
+const imageUrl = new URL(blog.data.image.src, siteUrl).href;
+
+const videoId = blog.data.video?.split("/embed/")[1]?.split("?")[0];
+
+const blogSchema = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: blog.data.title,
+    description: blog.data.excerpt,
+    image: imageUrl,
+    datePublished: blog.data.pubDate.toISOString(),
+    articleSection: blog.data.category,
+    keywords: blog.data.tags?.join(", "),
+    author: {
+        "@type": "Organization",
+        name: "sewmii",
+    },
+    publisher: {
+        "@type": "Organization",
+        name: "sewmii",
+    },
+    mainEntityOfPage: {
+        "@type": "WebPage",
+        "@id": Astro.url.href,
+    },
+    ...(videoId && {
+        video: {
+            "@type": "VideoObject",
+            name: blog.data.title,
+            description: blog.data.excerpt,
+            thumbnailUrl: imageUrl,
+            uploadDate: blog.data.videoPubDate?.toISOString(),
+            embedUrl: blog.data.video,
+            contentUrl: `https://www.youtube.com/watch?v=${videoId}`,
+        },
+    }),
+};
+---
+
+<Layout
+    title={blog.data.title}
+    description={blog.data.excerpt}
+    image={blog.data.image.src}
+    imageAlt={blog.data.imageAlt}
+    type="article"
+>
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(blogSchema)} slot="head" />
+    <main>
+        {/* ----- Blog Post ----- */}
+        <Section class="bg-background-alternate">
+            <article class="max-w-3xl">
+                {/* ----- Article Header ----- */}
+                <header class="animate-on-scroll mb-8 max-md:mb-6">
+                    <Title as="h1">{blog.data.title}</Title>
+                    <div class="flex gap-2 text-gray-600 max-md:text-sm flex-wrap">
+                        <span>{blog.data.category}</span>
+                        <span>·</span>
+                        <span>{blog.data.readTime}</span>
+                        <span>·</span>
+                        <span>{formattedDate}</span>
+                    </div>
+                </header>
+
+                {/* ----- Video/Image ----- */}
+                {
+                    blog.data.video ? (
+                        <div class="animate-on-scroll mb-8 aspect-video w-full max-md:mb-6">
+                            <iframe
+                                src={blog.data.video}
+                                title={blog.data.title}
+                                class="h-full w-full rounded-4xl max-md:rounded-2xl"
+                                loading="eager"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen
+                            />
+                        </div>
+                    ) : (
+                        <Image
+                            src={blog.data.image}
+                            alt={blog.data.imageAlt}
+                            width={1200}
+                            height={675}
+                            class="animate-on-scroll mb-8 aspect-video w-full rounded-4xl object-cover max-md:mb-6"
+                            loading="eager"
+                        />
+                    )
+                }
+
+                {/* ----- Article Body ----- */}
+                <div class="post-content animate-on-scroll">
+                    <Content />
+                    <p class="text-gray-600">— sewmii</p>
+                </div>
+
+                {/* ----- Tags ----- */}
+                {
+                    blog.data.tags && blog.data.tags.length > 0 && (
+                        <div class="mt-10 flex flex-wrap gap-2 max-md:mt-8">
+                            {blog.data.tags.map((tag) => (
+                                <span class="rounded-full border-3 border-primary bg-white px-4 py-1 text-sm font-bold">
+                                    {tag}
+                                </span>
+                            ))}
+                        </div>
+                    )
+                }
+            </article>
+        </Section>
+
+        {/* ----- Other Blogs ----- */}
+        {/*
+        <Section class="animate-on-scroll">
+            <Title as="h2" class="mb-12 max-md:mb-8">Other Blogs</Title>
+            <BlogsList blogs={otherBlogs} />
+        </Section>
+        */}
+    </main>
+</Layout>

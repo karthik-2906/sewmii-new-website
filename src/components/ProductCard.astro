@@ -13,7 +13,7 @@ const baseClasses =
     "animate-on-scroll flex flex-col overflow-hidden rounded-4xl border-3 border-primary bg-white shadow-brutal";
 ---
 
-<a href={`/products/${product.data.slug}`} class={baseClasses} {style} draggable="false">
+<a href={`/products/${product.id}`} class={baseClasses} {style} draggable="false">
     {/* ----- Product Card Image ----- */}
     <div class="relative w-full aspect-square border-b-3 border-primary overflow-hidden group">
         <Image
