@@ -1,0 +1,18 @@
+---
+import type { CollectionEntry } from "astro:content";
+import BlogCard from "../components/BlogCard.astro";
+
+type Props = {
+    blogs: CollectionEntry<"blogs">[];
+};
+
+const { blogs } = Astro.props;
+---
+
+<div class="grid grid-cols-3 gap-8 max-lg:grid-cols-2 max-sm:grid-cols-1">
+    {
+        blogs.map((blog, index) => (
+            <BlogCard {blog} style={`--delay: ${((index % 3) + 1) * 100}ms`} />
+        ))
+    }
+</div>

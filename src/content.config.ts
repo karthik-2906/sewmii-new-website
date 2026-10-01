@@ -6,7 +6,6 @@ const productsCollection = defineCollection({
     loader: glob({ base: "./src/content/products", pattern: "**/*.mdx" }),
     schema: ({ image }) =>
         z.object({
-            slug: z.string(),
             featured: z.boolean(),
             label: z.string(),
             title: z.string(),
@@ -40,7 +39,25 @@ const testimonialsCollection = defineCollection({
         }),
 });
 
+const blogsCollection = defineCollection({
+    loader: glob({ base: "./src/content/blogs", pattern: "**/*.mdx" }),
+    schema: ({ image }) =>
+        z.object({
+            title: z.string(),
+            excerpt: z.string(),
+            category: z.string(),
+            tags: z.array(z.string()).optional(),
+            pubDate: z.date(),
+            readTime: z.string(),
+            image: image(),
+            imageAlt: z.string(),
+            video: z.string().optional(),
+            videoPubDate: z.date().optional(),
+        }),
+});
+
 export const collections = {
     products: productsCollection,
     testimonials: testimonialsCollection,
+    blogs: blogsCollection
 };

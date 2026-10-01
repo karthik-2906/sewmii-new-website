@@ -1,0 +1,21 @@
+---
+import { getCollection } from "astro:content";
+import BlogsList from "../components/BlogsList.astro";
+import Layout from "../layouts/Layout.astro";
+import Section from "../components/Section.astro";
+import Title from "../components/Title.astro";
+
+const blogs = await getCollection("blogs");
+---
+
+<Layout
+    title="Sewing Tutorials & Insights"
+    description="Explore sewing tutorials, construction tips, and pattern insights by sewmii. Learn professional techniques, structural hacks, and garment-making guides."
+>
+    <main>
+        <Section class="bg-background-alternate">
+            <Title as="h2" class="mb-12 max-sm:mb-8">Sewing Tutorials and Insights</Title>
+            <BlogsList blogs={blogs} />
+        </Section>
+    </main>
+</Layout>

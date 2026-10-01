@@ -1,0 +1,41 @@
+---
+import { type CollectionEntry } from "astro:content";
+import { Image } from "astro:assets";
+
+type Props = {
+    blog: CollectionEntry<"blogs">;
+    style: string;
+};
+
+const { blog, style } = Astro.props;
+
+const baseClasses =
+    "animate-on-scroll flex h-full flex-col overflow-hidden rounded-4xl border-3 border-primary bg-white shadow-brutal";
+---
+
+<a href={`/blog/${blog.id}`} class={baseClasses} {style} draggable="false">
+    {/* ----- Image ----- */}
+    <Image
+        src={blog.data.image}
+        width={1920}
+        height={1080}
+        alt={blog.data.imageAlt}
+        class="aspect-video w-full border-b-3 border-primary object-cover"
+    />
+
+    {/* ----- Text Container ----- */}
+    <div class="flex flex-1 flex-col gap-2 p-4">
+        <p class="text-xs font-bold tracking-wide text-gray-500 uppercase">{blog.data.category}</p>
+        <h2 class="text-xl font-semibold">{blog.data.title}</h2>
+        <p class="line-clamp-3 text-sm">{blog.data.excerpt}</p>
+        <div class="mt-auto pt-2 flex gap-2 text-xs font-semibold text-gray-500">
+            <span
+                >{
+                    blog.data.pubDate.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })
+                }</span
+            >
+            <span>·</span>
+            <span>{blog.data.readTime}</span>
+        </div>
+    </div>
+</a>

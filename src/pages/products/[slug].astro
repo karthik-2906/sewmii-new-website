@@ -14,7 +14,7 @@ const products = await getCollection("products");
 export const getStaticPaths = async () => {
     const products = await getCollection("products");
     return products.map((product) => ({
-        params: { slug: product.data.slug },
+        params: { slug: product.id },
         props: { product },
     }));
 };
@@ -24,7 +24,7 @@ type Props = {
 };
 
 const { product } = Astro.props;
-const otherProducts = products.filter((p) => p.data.slug !== product.data.slug);
+const otherProducts = products.filter((p) => p.id !== product.id);
 
 const productSchema = {
     "@context": "https://schema.org",
@@ -152,8 +152,7 @@ const productSchema = {
 
         {/* ----- Other Products ----- */}
         <Section class="animate-on-scroll">
-            <Title as="h2">Other Products</Title>
-            <Text class="mb-12 max-md:mb-8">Three ways to get your hands on a sewmii pattern</Text>
+            <Title as="h2" class="mb-12 max-md:mb-8">Other Products</Title>
             <ProductsList products={otherProducts} />
         </Section>
     </main>
