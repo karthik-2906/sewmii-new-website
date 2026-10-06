@@ -121,6 +121,10 @@ body:has(dialog[open]) {
     margin-bottom: 1.25rem;
 }
 
+.post-content li {
+    line-height: 1.75;
+}
+
 .post-content a {
     text-decoration: underline;
     font-weight: 600;
